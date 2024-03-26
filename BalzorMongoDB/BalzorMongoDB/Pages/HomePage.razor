@@ -1,0 +1,550 @@
+﻿@page "/Tables"
+@using Radzen.Blazor
+@using BalzorMongoDB.Data
+@inject BalzorMongoDB.IService.IAgent agentService
+@inject BalzorMongoDB.IService.IAppliances appliancesService
+@inject BalzorMongoDB.IService.IAppliancesOwned appliancesOwnedService
+@inject BalzorMongoDB.IService.ICompany companyService
+@inject BalzorMongoDB.IService.ICounty countyService
+@inject BalzorMongoDB.IService.IEmployee employeeService
+@inject BalzorMongoDB.IService.IHome homeService
+@inject BalzorMongoDB.IService.IHomeOwner homeOwnerService
+@inject BalzorMongoDB.IService.IListing listingService
+@inject BalzorMongoDB.IService.ILocation locationService
+@inject BalzorMongoDB.IService.ISalesMade salesMadeService
+
+
+<h5>Agents Table</h5>
+
+<RadzenDataGrid Data="@Agents" TItem="Agent" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+				AllowMultiColumnSorting="true" AllowFiltering="true">
+	<Columns>
+		<RadzenDataGridColumn TItem="Agent" Property="AgentID" Title="Agent ID" />
+		<RadzenDataGridColumn TItem="Agent" Property="FirstName" Title="First Name" />
+		<RadzenDataGridColumn TItem="Agent" Property="LastName" Title="Last Name" />
+		<RadzenDataGridColumn TItem="Agent" Property="LastName" Title="Last Name">
+			<Template>
+
+			</Template>
+		</RadzenDataGridColumn>
+	</Columns>
+</RadzenDataGrid>
+
+<br/>
+
+<h5>Appliances Table</h5>
+
+<RadzenDataGrid Data="@AppliancesList" TItem="Appliances" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+				AllowMultiColumnSorting="true" AllowFiltering="true">
+	<Columns>
+		<RadzenDataGridColumn TItem="Appliances" Property="ModelNameNum" Title="Model Name/No." />
+		<RadzenDataGridColumn TItem="Appliances" Property="Manufacturer" Title="Manufacturer" />
+		<RadzenDataGridColumn TItem="Appliances" Property="ApplianceName" Title="Appliance Name" />
+		<RadzenDataGridColumn TItem="Appliances" Property="AppliancePrice" Title="Appliance Price" />
+		<RadzenDataGridColumn TItem="Appliances" Property="YearConstructed" Title="Year Constructed" />
+	</Columns>
+
+</RadzenDataGrid>
+
+<br/>
+
+<h5>Appliances Owned Table</h5>
+
+<RadzenDataGrid Data="@AppliancesOwned" TItem="AppliancesOwned" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+				AllowMultiColumnSorting="true" AllowFiltering="true">
+	<Columns>
+		<RadzenDataGridColumn TItem="AppliancesOwned" Property="ModelNameNum" Title="Model Name/No." />
+		<RadzenDataGridColumn TItem="AppliancesOwned" Property="Manufacturer" Title="Manufacturer" />
+		<RadzenDataGridColumn TItem="AppliancesOwned" Property="ApplianceName" Title="Appliance Name" />
+		<RadzenDataGridColumn TItem="AppliancesOwned" Property="HomeID" Title="Home ID" />
+		<RadzenDataGridColumn TItem="AppliancesOwned" Property="Quantity" Title="Quantity" />
+		<RadzenDataGridColumn TItem="AppliancesOwned" Property="RetailPrice" Title="Retail Price" />
+	</Columns>
+
+</RadzenDataGrid>
+
+<br />
+
+<h5>Company Table</h5>
+
+<RadzenDataGrid Data="@Companies" TItem="Company" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+				AllowMultiColumnSorting="true" AllowFiltering="true">
+	<Columns>
+		<RadzenDataGridColumn TItem="Company" Property="CompanyName" Title="Company Name" />
+		<RadzenDataGridColumn TItem="Company" Property="OfficeID" Title="Office ID" />
+		<RadzenDataGridColumn TItem="Company" Property="CityName" Title="City Name" />
+	</Columns>
+
+</RadzenDataGrid>
+
+<br />
+
+<h5>County Table</h5>
+
+<RadzenDataGrid Data="@Counties" TItem="County" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+				AllowMultiColumnSorting="true" AllowFiltering="true">
+	<Columns>
+		<RadzenDataGridColumn TItem="County" Property="CountyName" Title="County Name" />
+		<RadzenDataGridColumn TItem="County" Property="CityName" Title="City Name" />
+		<RadzenDataGridColumn TItem="County" Property="CityPop" Title="City Pop" />
+	</Columns>
+
+</RadzenDataGrid>
+
+<br />
+
+<h5>Employee Table</h5>
+
+<RadzenDataGrid Data="@Employees" TItem="Employee" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+				AllowMultiColumnSorting="true" AllowFiltering="true">
+	<Columns>
+		<RadzenDataGridColumn TItem="Employee" Property="EmployeeId" Title="Employee Id" />
+		<RadzenDataGridColumn TItem="Employee" Property="CompanyName" Title="Company Name" />
+		<RadzenDataGridColumn TItem="Employee" Property="AgentID" Title="Agent ID" />
+		<RadzenDataGridColumn TItem="Employee" Property="CommisionRate" Title="Commision Rate" />
+	</Columns>
+
+</RadzenDataGrid>
+
+<br/>
+
+<h5>Home Table</h5>
+
+<RadzenDataGrid Data="@Homes" TItem="Home" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+				AllowMultiColumnSorting="true" AllowFiltering="true">
+	<Columns>
+		<RadzenDataGridColumn TItem="Home" Property="HomeID" Title="Home ID" />
+		<RadzenDataGridColumn TItem="Home" Property="FloorSpace" Title="FloorSpace" />
+		<RadzenDataGridColumn TItem="Home" Property="Floors" Title="Floors" />
+		<RadzenDataGridColumn TItem="Home" Property="Bedroooms" Title="Bedrooms" />
+		<RadzenDataGridColumn TItem="Home" Property="LandSize" Title="LandSize" />
+		<RadzenDataGridColumn TItem="Home" Property="YearConstructed" Title="Year Constructed" />
+		<RadzenDataGridColumn TItem="Home" Property="HomeType" Title="Home Type" />
+		<RadzenDataGridColumn TItem="Home" Property="ExtraFeatures" Title="Extra Features" />
+		<RadzenDataGridColumn TItem="Home" Property="UnitNum" Title="Unit No." />
+		<RadzenDataGridColumn TItem="Home" Property="UnitNum">
+			<Template>
+
+			</Template>
+		</RadzenDataGridColumn>
+	</Columns>
+</RadzenDataGrid>
+
+<br />
+
+<h5>Home Owner Table</h5>
+
+<RadzenDataGrid Data="@HomeOwners" TItem="HomeOwner" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+				AllowMultiColumnSorting="true" AllowFiltering="true">
+	<Columns>
+		<RadzenDataGridColumn TItem="HomeOwner" Property="SSN" Title="SSN" />
+		<RadzenDataGridColumn TItem="HomeOwner" Property="HomeID" Title="Home ID" />
+		<RadzenDataGridColumn TItem="HomeOwner" Property="FirstName" Title="First Name" />
+		<RadzenDataGridColumn TItem="HomeOwner" Property="LastName" Title="Last Name" />
+		<RadzenDataGridColumn TItem="HomeOwner" Property="Dependents" Title="Dependents" />
+		<RadzenDataGridColumn TItem="HomeOwner" Property="Income" Title="Income" />
+		<RadzenDataGridColumn TItem="HomeOwner" Property="Age" Title="Age" />
+		<RadzenDataGridColumn TItem="HomeOwner" Property="Proffession" Title="Proffession" />
+		<RadzenDataGridColumn TItem="HomeOwner" Property="IsCurrentOwner" Title="Current Owner" />
+	</Columns>
+</RadzenDataGrid>
+
+<br />
+
+<h5>Listing Table</h5>
+
+<RadzenDataGrid Data="@Listings" TItem="Listing" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+				AllowMultiColumnSorting="true" AllowFiltering="true">
+	<Columns>
+		<RadzenDataGridColumn TItem="Listing" Property="OwnerId" Title="Owner ID" />
+		<RadzenDataGridColumn TItem="Listing" Property="EmployeeID" Title="Employee ID" />
+		<RadzenDataGridColumn TItem="Listing" Property="HomeId" Title="Home ID" />
+		<RadzenDataGridColumn TItem="Listing" Property="AvalibleStartDate" Title="Avalible Start Date" />
+		<RadzenDataGridColumn TItem="Listing" Property="AvalibleEndDate" Title="Avalible End Date" />
+		<RadzenDataGridColumn TItem="Listing" Property="ListingPrice" Title="Listing Price" />
+		<RadzenDataGridColumn TItem="Listing" Property="IsSold" Title="Is Sold" />
+		<RadzenDataGridColumn TItem="Listing" Property="SoldTo" Title="Sold To" />
+	</Columns>
+</RadzenDataGrid>
+
+<br />
+
+<h5>Location Table</h5>
+
+<RadzenDataGrid Data="@Locations" TItem="Location" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+				AllowMultiColumnSorting="true" AllowFiltering="true">
+	<Columns>
+		<RadzenDataGridColumn TItem="Location" Property="HomeID" Title="Home ID" />
+		<RadzenDataGridColumn TItem="Location" Property="CityName" Title="City Name" />
+		<RadzenDataGridColumn TItem="Location" Property="Street" Title="Street" />
+		<RadzenDataGridColumn TItem="Location" Property="ZipCode" Title="Zip Code" />
+		<RadzenDataGridColumn TItem="Location" Property="UnitNum" Title="Unit No." />
+	</Columns>
+</RadzenDataGrid>
+
+<br />
+
+<h5>Sales Made Table</h5>
+
+<RadzenDataGrid Data="@SalesMadeList" TItem="SalesMade" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+				AllowMultiColumnSorting="true" AllowFiltering="true">
+	<Columns>
+		<RadzenDataGridColumn TItem="SalesMade" Property="HomeID" Title="Home ID" />
+		<RadzenDataGridColumn TItem="SalesMade" Property="CityName" Title="City Name" />
+		<RadzenDataGridColumn TItem="SalesMade" Property="Street" Title="Street" />
+		<RadzenDataGridColumn TItem="SalesMade" Property="ZipCode" Title="Zip Code" />
+		<RadzenDataGridColumn TItem="SalesMade" Property="UnitNum" Title="Unit No." />
+	</Columns>
+</RadzenDataGrid>
+
+<br/>
+
+@code {
+	protected override async Task OnInitializedAsync()
+	{
+		GetAgents();
+		GetAppliances();
+		GetAllAppliancesOwned();
+		GetCompanies();
+		GetCounties();
+		GetEmployees();
+		GetHomes();
+		GetHomeOwners();
+		GetListings();
+		GetLocations();
+		GetAllSalesMade();
+	}
+}
+
+@code {
+	Agent agent = new Agent();
+	List<Agent> Agents = new List<Agent>();
+
+	private void GetAgents()
+	{
+		Agents = agentService.GetAgents();
+	}
+
+	private void SaveAgent()
+	{
+		agentService.SaveOrUpdate(agent);
+		ResetAgent();
+		GetAgents();
+	}
+	private void ResetAgent()
+	{
+		agent = new Agent();
+	}
+	private void EditAgent(string agentId)
+	{
+		agent = agentService.GetAgent(agentId);
+	}
+	private void DeleteAgent(string agentId)
+	{
+		agentService.Delete(agentId);
+		GetAgents();
+	}
+}
+
+@code {
+	Appliances appliances = new Appliances();
+	List<Appliances> AppliancesList = new List<Appliances>();
+
+	private void GetAppliances()
+	{
+		AppliancesList = appliancesService.GetAppliances();
+	}
+
+	private void SaveAppliances()
+	{
+		appliancesService.SaveOrUpdate(appliances);
+		ResetAppliances();
+		GetAppliances();
+	}
+	private void ResetAppliances()
+	{
+		appliances = new Appliances();
+	}
+	private void EditAppliances(string appliancesId)
+	{
+		appliances = appliancesService.GetAppliance(appliancesId);
+	}
+	private void DeleteAppliances(string appliancesId)
+	{
+		appliancesService.Delete(appliancesId);
+		GetAppliances();
+	}
+}
+
+@code
+{
+	AppliancesOwned appliancesOwned = new AppliancesOwned();
+	List<AppliancesOwned> AppliancesOwned = new List<AppliancesOwned>();
+
+	private void GetAllAppliancesOwned()
+	{
+		AppliancesOwned = appliancesOwnedService.GetAppliancesOwned();
+	}
+
+	private void SaveAppliancesOwned()
+	{
+		appliancesOwnedService.SaveOrUpdate(appliancesOwned);
+		ResetAppliancesOwned();
+		GetAllAppliancesOwned();
+	}
+	private void ResetAppliancesOwned()
+	{
+		appliancesOwned = new AppliancesOwned();
+	}
+	private void EditAppliancesOwned(string appliancesOwnedId)
+	{
+		appliancesOwned = appliancesOwnedService.GetApplianceOwned(appliancesOwnedId);
+	}
+	private void DeleteAppliancesOwned(string appliancesOwnedId)
+	{
+		appliancesOwnedService.Delete(appliancesOwnedId);
+		GetAllAppliancesOwned();
+	}
+}
+
+@code
+{
+	Company company = new Company();
+	List<Company> Companies = new List<Company>();
+
+	private void GetCompanies()
+	{
+		Companies = companyService.GetCompanies();
+	}
+
+	private void SaveCompany()
+	{
+		companyService.SaveOrUpdate(company);
+		ResetCompany();
+		GetCompanies();
+	}
+	private void ResetCompany()
+	{
+		company = new Company();
+	}
+	private void EditCompany(string companyId)
+	{
+		company = companyService.GetCompany(companyId);
+	}
+	private void DeleteCompany(string companyId)
+	{
+		companyService.Delete(companyId);
+		GetCompanies();
+	}
+}
+
+@code
+{
+	County county = new County();
+	List<County> Counties = new List<County>();
+
+	private void GetCounties()
+	{
+		Counties = countyService.GetCounties();
+	}
+
+	private void SaveCounty()
+	{
+		countyService.SaveOrUpdate(county);
+		ResetCounty();
+		GetCounties();
+	}
+	private void ResetCounty()
+	{
+		county = new County();
+	}
+	private void EditCounty(string countyId)
+	{
+		county = countyService.GetCounty(countyId);
+	}
+	private void DeleteCounty(string countyId)
+	{
+		countyService.Delete(countyId);
+		GetCounties();
+	}
+}
+
+@code {
+	Employee employee = new Employee();
+	List<Employee> Employees = new List<Employee>();
+
+	private void GetEmployees()
+	{
+		Employees = employeeService.GetEmployees();
+	}
+
+	private void SaveEmployee()
+	{
+		employeeService.SaveOrUpdate(employee);
+		ResetEmployee();
+		GetEmployees();
+	}
+	private void ResetEmployee()
+	{
+		employee = new Employee();
+	}
+	private void EditEmployee(string employeeId)
+	{
+		employee = employeeService.GetEmployee(employeeId);
+	}
+	private void DeleteEmployee(string employeeId)
+	{
+		employeeService.Delete(employeeId);
+		GetEmployees();
+	}
+}
+
+@code {
+	Home home = new Home();
+	List<Home> Homes = new List<Home>();
+	
+	private void GetHomes()
+	{
+		Homes = homeService.GetHomes();
+	}
+
+	private void SaveHome()
+	{
+		homeService.SaveOrUpdate(home);
+		ResetHome();
+		GetHomes();
+	}
+	private void ResetHome()
+	{
+		home = new Home();
+	}
+	private void EditHome(string homeId)
+	{
+		home = homeService.GetHome(homeId);
+	}
+	private void DeleteHome(string homeId)
+	{
+		homeService.Delete(homeId);
+		GetHomes();
+	}
+}
+
+@code {
+	HomeOwner homeOwner = new HomeOwner();
+	List<HomeOwner> HomeOwners = new List<HomeOwner>();
+
+	private void GetHomeOwners()
+	{
+		HomeOwners = homeOwnerService.GetHomeOwners();
+	}
+
+	private void SaveHomeOwner()
+	{
+		homeOwnerService.SaveOrUpdate(homeOwner);
+		ResetHomeOwner();
+		GetHomeOwners();
+	}
+	private void ResetHomeOwner()
+	{
+		homeOwner = new HomeOwner();
+	}
+	private void EditHomeOwner(string homeOwnerId)
+	{
+		homeOwner = homeOwnerService.GetHomeOwner(homeOwnerId);
+	}
+	private void DeleteHomeOwner(string homeOwnerId)
+	{
+		homeOwnerService.Delete(homeOwnerId);
+		GetHomeOwners();
+	}
+}
+
+@code {
+	Listing listing = new Listing();
+	List<Listing> Listings = new List<Listing>();
+
+	private void GetListings()
+	{
+		Listings = listingService.GetListings();
+	}
+
+	private void SaveListing()
+	{
+		listingService.SaveOrUpdate(listing);
+		ResetListing();
+		GetListings();
+	}
+	private void ResetListing()
+	{
+		listing = new Listing();
+	}
+	private void EditListing(string listingId)
+	{
+		listing = listingService.GetListing(listingId);
+	}
+	private void DeleteListing(string listingId)
+	{
+		listingService.Delete(listingId);
+		GetListings();
+	}
+}
+
+@code {
+	Location location = new Location();
+	List<Location> Locations = new List<Location>();
+
+	private void GetLocations()
+	{
+		Locations = locationService.GetLocations();
+	}
+
+	private void SaveLocation()
+	{
+		locationService.SaveOrUpdate(location);
+		ResetLocation();
+		GetLocations();
+	}
+	private void ResetLocation()
+	{
+		location = new Location();
+	}
+	private void EditLocation(string locationId)
+	{
+		location = locationService.GetLocation(locationId);
+	}
+	private void DeleteLocation(string locationId)
+	{
+		locationService.Delete(locationId);
+		GetLocations();
+	}
+}
+
+@code {
+	SalesMade salesMade = new SalesMade();
+	List<SalesMade> SalesMadeList = new List<SalesMade>();
+
+	private void GetAllSalesMade()
+	{
+		SalesMadeList = salesMadeService.GetSalesMade();
+	}
+
+	private void SaveSalesMade()
+	{
+		salesMadeService.SaveOrUpdate(salesMade);
+		ResetSalesMade();
+		GetAllSalesMade();
+	}
+	private void ResetSalesMade()
+	{
+		salesMade = new SalesMade();
+	}
+	private void EditSalesMade(string salesMadeId)
+	{
+		salesMade = salesMadeService.GetSaleMade(salesMadeId);
+	}
+	private void DeleteSalesMade(string salesMadeId)
+	{
+		salesMadeService.Delete(salesMadeId);
+		GetAllSalesMade();
+	}
+}

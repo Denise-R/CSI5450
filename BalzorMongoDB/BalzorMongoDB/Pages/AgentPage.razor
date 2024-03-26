@@ -1,0 +1,57 @@
+﻿@page "/AgentTable"
+@using Radzen.Blazor
+@using BalzorMongoDB.Data
+@inject BalzorMongoDB.IService.IAgent agentService
+
+<PageTitle>Agent Table</PageTitle>
+
+<RadzenDataGrid Data="@Agents" TItem="Agent" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+				AllowMultiColumnSorting="true" AllowFiltering="true">
+	<Columns>
+		<RadzenDataGridColumn TItem="Agent" Property="AgentID" Title="Agent ID" />
+		<RadzenDataGridColumn TItem="Agent" Property="FirstName" Title="First Name" />
+		<RadzenDataGridColumn TItem="Agent" Property="LastName" Title="Last Name" />
+		<RadzenDataGridColumn TItem="Agent" Property="LastName" Title="Last Name">
+			<Template>
+
+			</Template>
+		</RadzenDataGridColumn>
+	</Columns>
+
+</RadzenDataGrid>
+
+
+
+@code {
+	Agent agent = new Agent();
+	List<Agent> Agents = new List<Agent>();
+	protected override async Task OnInitializedAsync()
+	{
+		GetAgents();
+	}
+
+	private void GetAgents()
+	{
+		Agents = agentService.GetAgents();
+	}
+
+	private void Save()
+	{
+		agentService.SaveOrUpdate(agent);
+		Reset();
+		GetAgents();
+	}
+	private void Reset()
+	{
+		agent = new Agent();
+	}
+	private void Edit(string agentId)
+	{
+		agent = agentService.GetAgent(agentId);
+	}
+	private void Delete(string agentId)
+	{
+		agentService.Delete(agentId);
+		GetAgents();
+	}
+}

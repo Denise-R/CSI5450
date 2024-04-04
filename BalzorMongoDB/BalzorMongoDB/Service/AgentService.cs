@@ -17,13 +17,13 @@ namespace BalzorMongoDB.Service
 		}
 		public string Delete(string agentID)
 		{
-			_agentTable.DeleteOne(x => x.id == agentID);
+			_agentTable.DeleteOne(x => x._id == agentID);
 			return "Deleted";
 		}
 
 		public Agent GetAgent(string agentID)
 		{
-			return _agentTable.Find(x => x.id == agentID).FirstOrDefault();
+			return _agentTable.Find(x => x._id == agentID).FirstOrDefault();
 		}
 
 		public List<Agent> GetAgents()
@@ -33,14 +33,14 @@ namespace BalzorMongoDB.Service
 
 		public void SaveOrUpdate(Agent agent)
 		{
-			var agentObj = _agentTable.Find(x => x.id == agent.id).FirstOrDefault();
+			var agentObj = _agentTable.Find(x => x._id == agent._id).FirstOrDefault();
 			if (agentObj == null)
 			{
 				_agentTable.InsertOne(agent);
 			}
 			else
 			{
-				_agentTable.ReplaceOne(x => x.id == agent.id, agent);
+				_agentTable.ReplaceOne(x => x._id == agent._id, agent);
 			}
 		}
 	}

@@ -10,14 +10,14 @@ namespace BalzorMongoDB.Data
 	public class Listing
 	{
 		[BsonRepresentation(BsonType.ObjectId)]
-		public string id { get; set; } = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-		public string OwnerId { get; set; } = ""; // same as SSN
-		public int EmployeeID { get; set; } = 0;
-		public int HomeId { get; set; } = 0;
-		public string AvalibleStartDate { get; set; } = "";
-		public string AvalibleEndDate { get; set; } = "";
-		public float ListingPrice { get; set; } = 0;
-		public bool IsSold { get; set; } = true;
-		public string SoldTo { get; set; } = "";
+		public string _id { get; set; } = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+		public string ownerID { get; set; } = ""; // same as SSN
+		public int employeeID { get; set; } = 0;
+		public int homeID { get; set; } = 0;
+		public string availableStartDate { get; set; } = "";
+		public string availableEndDate { get; set; } = "";
+		public int listingPrice { get; set; } = 0;
+		public bool isSold { get; set; } = true;
+		public string soldTo { get; set; } = "";
 	}
 }

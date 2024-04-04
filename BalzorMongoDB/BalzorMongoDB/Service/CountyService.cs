@@ -17,13 +17,13 @@ namespace BalzorMongoDB.Service
 		}
 		public string Delete(string countyID)
 		{
-			_countyTable.DeleteOne(x => x.id == countyID);
+			_countyTable.DeleteOne(x => x._id == countyID);
 			return "Deleted";
 		}
 
 		public County GetCounty(string countyID)
 		{
-			return _countyTable.Find(x => x.id == countyID).FirstOrDefault();
+			return _countyTable.Find(x => x._id == countyID).FirstOrDefault();
 		}
 
 		public List<County> GetCounties()
@@ -33,14 +33,14 @@ namespace BalzorMongoDB.Service
 
 		public void SaveOrUpdate(County county)
 		{
-			var countyObj = _countyTable.Find(x => x.id == county.id).FirstOrDefault();
+			var countyObj = _countyTable.Find(x => x._id == county._id).FirstOrDefault();
 			if (countyObj == null)
 			{
 				_countyTable.InsertOne(county);
 			}
 			else
 			{
-				_countyTable.ReplaceOne(x => x.id == county.id, county);
+				_countyTable.ReplaceOne(x => x._id == county._id, county);
 			}
 		}
 	}

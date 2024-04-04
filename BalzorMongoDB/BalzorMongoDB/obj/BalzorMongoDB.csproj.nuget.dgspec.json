@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\BalzorMongoDB.csproj": {}
+    "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\BalzorMongoDB.csproj": {}
   },
   "projects": {
-    "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\BalzorMongoDB.csproj": {
+    "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\BalzorMongoDB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\BalzorMongoDB.csproj",
+        "projectUniqueName": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\BalzorMongoDB.csproj",
         "projectName": "BalzorMongoDB",
-        "projectPath": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\BalzorMongoDB.csproj",
+        "projectPath": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\BalzorMongoDB.csproj",
         "packagesPath": "C:\\Users\\denis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\obj\\",
+        "outputPath": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\denis\\AppData\\Roaming\\NuGet\\NuGet.Config",

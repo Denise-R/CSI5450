@@ -10,10 +10,10 @@ namespace BalzorMongoDB.Data
 	public class Employee
 	{
 		[BsonRepresentation(BsonType.ObjectId)]
-		public string id { get; set; } = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-		public int EmployeeId { get; set; } = 0;
-		public string CompanyName { get; set; } = "";
-		public int AgentID { get; set; } = 0;
-		public double CommisionRate { get; set; } = 0;
+		public string _id { get; set; } = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+		public int employeeID { get; set; } = 0;
+		public string companyName { get; set; } = "";
+		public int agentID { get; set; } = 0;
+		public double commissionRate { get; set; } = 0;
 	}
 }

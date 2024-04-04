@@ -13,17 +13,17 @@ namespace BalzorMongoDB.Service
 		{
 			_mongoClient = new MongoClient("mongodb://127.0.0.1:27017/");
 			_database = _mongoClient.GetDatabase("RealEstate"); // fix me
-			_appliancesOwnedTable = _database.GetCollection<AppliancesOwned>("HppliancesOwned");
+			_appliancesOwnedTable = _database.GetCollection<AppliancesOwned>("AppliancesOwned");
 		}
 		public string Delete(string appliancesOwnedID)
 		{
-			_appliancesOwnedTable.DeleteOne(x => x.id == appliancesOwnedID);
+			_appliancesOwnedTable.DeleteOne(x => x._id == appliancesOwnedID);
 			return "Deleted";
 		}
 
 		public AppliancesOwned GetApplianceOwned(string appliancesOwnedID)
 		{
-			return _appliancesOwnedTable.Find(x => x.id == appliancesOwnedID).FirstOrDefault();
+			return _appliancesOwnedTable.Find(x => x._id == appliancesOwnedID).FirstOrDefault();
 		}
 
 		public List<AppliancesOwned> GetAppliancesOwned()
@@ -33,14 +33,14 @@ namespace BalzorMongoDB.Service
 
 		public void SaveOrUpdate(AppliancesOwned appliancesOwned)
 		{
-			var appliancesOwnedObj = _appliancesOwnedTable.Find(x => x.id == appliancesOwned.id).FirstOrDefault();
+			var appliancesOwnedObj = _appliancesOwnedTable.Find(x => x._id == appliancesOwned._id).FirstOrDefault();
 			if (appliancesOwnedObj == null)
 			{
 				_appliancesOwnedTable.InsertOne(appliancesOwned);
 			}
 			else
 			{
-				_appliancesOwnedTable.ReplaceOne(x => x.id == appliancesOwned.id, appliancesOwned);
+				_appliancesOwnedTable.ReplaceOne(x => x._id == appliancesOwned._id, appliancesOwned);
 			}
 		}
 	}

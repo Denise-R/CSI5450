@@ -10,9 +10,9 @@ namespace BalzorMongoDB.Data
 	public class County
 	{
 		[BsonRepresentation(BsonType.ObjectId)]
-		public string id { get; set; } = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-		public string CountyName { get; set; } = "";
-		public string CityName { get; set; } = "";
-		public int CityPop { get; set; } = 0;
+		public string _id { get; set; } = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+		public string countyName { get; set; } = "";
+		public string cityName { get; set; } = "";
+		public int cityPop { get; set; } = 0;
 	}
 }

@@ -13,191 +13,217 @@
 @inject BalzorMongoDB.IService.ILocation locationService
 @inject BalzorMongoDB.IService.ISalesMade salesMadeService
 
-
-<h5>Agents Table</h5>
-
-<RadzenDataGrid Data="@Agents" TItem="Agent" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
-				AllowMultiColumnSorting="true" AllowFiltering="true">
-	<Columns>
-		<RadzenDataGridColumn TItem="Agent" Property="AgentID" Title="Agent ID" />
-		<RadzenDataGridColumn TItem="Agent" Property="FirstName" Title="First Name" />
-		<RadzenDataGridColumn TItem="Agent" Property="LastName" Title="Last Name" />
-		<RadzenDataGridColumn TItem="Agent" Property="LastName" Title="Last Name">
-			<Template>
-
-			</Template>
-		</RadzenDataGridColumn>
-	</Columns>
-</RadzenDataGrid>
-
+<h5>Real Estate Database</h5>
+<br/>
 <br/>
 
-<h5>Appliances Table</h5>
 
-<RadzenDataGrid Data="@AppliancesList" TItem="Appliances" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
-				AllowMultiColumnSorting="true" AllowFiltering="true">
-	<Columns>
-		<RadzenDataGridColumn TItem="Appliances" Property="ModelNameNum" Title="Model Name/No." />
-		<RadzenDataGridColumn TItem="Appliances" Property="Manufacturer" Title="Manufacturer" />
-		<RadzenDataGridColumn TItem="Appliances" Property="ApplianceName" Title="Appliance Name" />
-		<RadzenDataGridColumn TItem="Appliances" Property="AppliancePrice" Title="Appliance Price" />
-		<RadzenDataGridColumn TItem="Appliances" Property="YearConstructed" Title="Year Constructed" />
-	</Columns>
-
-</RadzenDataGrid>
-
-<br/>
-
-<h5>Appliances Owned Table</h5>
-
-<RadzenDataGrid Data="@AppliancesOwned" TItem="AppliancesOwned" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
-				AllowMultiColumnSorting="true" AllowFiltering="true">
-	<Columns>
-		<RadzenDataGridColumn TItem="AppliancesOwned" Property="ModelNameNum" Title="Model Name/No." />
-		<RadzenDataGridColumn TItem="AppliancesOwned" Property="Manufacturer" Title="Manufacturer" />
-		<RadzenDataGridColumn TItem="AppliancesOwned" Property="ApplianceName" Title="Appliance Name" />
-		<RadzenDataGridColumn TItem="AppliancesOwned" Property="HomeID" Title="Home ID" />
-		<RadzenDataGridColumn TItem="AppliancesOwned" Property="Quantity" Title="Quantity" />
-		<RadzenDataGridColumn TItem="AppliancesOwned" Property="RetailPrice" Title="Retail Price" />
-	</Columns>
-
-</RadzenDataGrid>
-
+<div class="col-md-2">
+	<div class="mb-3">
+		<label class="form-check-label fw-bold">Select Table View</label>
+		<select class="form-select" @bind="tableViewed">
+			<option value="Agent">Agent</option>
+			<option value="Appliances">Appliances</option>
+			<option value="Appliances Owned">Appliances Owned</option>
+			<option value="Company">Company</option>
+			<option value="County">County</option>
+			<option value="Employee">Employee</option>
+			<option value="Homes">Homes</option>
+			<option value="Home Owners">Home Owners</option>
+			<option value="Listings">Listings</option>
+			<option value="Locations">Locations</option>
+			<option value="Sales Made">Sales Made</option>
+		</select>
+	</div>
+</div>
 <br />
 
-<h5>Company Table</h5>
+@if (tableViewed == "Agent")
+{
+	
+	<label class="form-check-label fw-bold">Agents Table</label>
 
-<RadzenDataGrid Data="@Companies" TItem="Company" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+	<RadzenDataGrid Data="@Agents" TItem="Agent" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
 				AllowMultiColumnSorting="true" AllowFiltering="true">
-	<Columns>
-		<RadzenDataGridColumn TItem="Company" Property="CompanyName" Title="Company Name" />
-		<RadzenDataGridColumn TItem="Company" Property="OfficeID" Title="Office ID" />
-		<RadzenDataGridColumn TItem="Company" Property="CityName" Title="City Name" />
-	</Columns>
+		<Columns>
+			<RadzenDataGridColumn TItem="Agent" Property="agentID" Title="Agent ID" />
+			<RadzenDataGridColumn TItem="Agent" Property="firstName" Title="First Name" />
+			<RadzenDataGridColumn TItem="Agent" Property="lastName" Title="Last Name" />
+		</Columns>
+	</RadzenDataGrid>
+}
+else if (tableViewed == "Appliances")
+{
+	<h5>Appliances Table</h5>
 
-</RadzenDataGrid>
-
-<br />
-
-<h5>County Table</h5>
-
-<RadzenDataGrid Data="@Counties" TItem="County" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+	<RadzenDataGrid Data="@AppliancesList" TItem="Appliances" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
 				AllowMultiColumnSorting="true" AllowFiltering="true">
-	<Columns>
-		<RadzenDataGridColumn TItem="County" Property="CountyName" Title="County Name" />
-		<RadzenDataGridColumn TItem="County" Property="CityName" Title="City Name" />
-		<RadzenDataGridColumn TItem="County" Property="CityPop" Title="City Pop" />
-	</Columns>
+		<Columns>
+			<RadzenDataGridColumn TItem="Appliances" Property="modelNameNum" Title="Model Name/No." />
+			<RadzenDataGridColumn TItem="Appliances" Property="manufacturer" Title="Manufacturer" />
+			<RadzenDataGridColumn TItem="Appliances" Property="applianceName" Title="Appliance Name" />
+			<RadzenDataGridColumn TItem="Appliances" Property="appliancePrice" Title="Appliance Price" />
+		</Columns>
 
-</RadzenDataGrid>
+	</RadzenDataGrid>
+}
+else if (tableViewed == "Appliances Owned")
+{
+	<h5>Appliances Owned Table</h5>
 
-<br />
-
-<h5>Employee Table</h5>
-
-<RadzenDataGrid Data="@Employees" TItem="Employee" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+	<RadzenDataGrid Data="@AppliancesOwned" TItem="AppliancesOwned" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
 				AllowMultiColumnSorting="true" AllowFiltering="true">
-	<Columns>
-		<RadzenDataGridColumn TItem="Employee" Property="EmployeeId" Title="Employee Id" />
-		<RadzenDataGridColumn TItem="Employee" Property="CompanyName" Title="Company Name" />
-		<RadzenDataGridColumn TItem="Employee" Property="AgentID" Title="Agent ID" />
-		<RadzenDataGridColumn TItem="Employee" Property="CommisionRate" Title="Commision Rate" />
-	</Columns>
+		<Columns>
+			<RadzenDataGridColumn TItem="AppliancesOwned" Property="modelNameNum" Title="Model Name/No." />
+			<RadzenDataGridColumn TItem="AppliancesOwned" Property="manufacturer" Title="Manufacturer" />
+			<RadzenDataGridColumn TItem="AppliancesOwned" Property="applianceName" Title="Appliance Name" />
+			<RadzenDataGridColumn TItem="AppliancesOwned" Property="homeID" Title="Home ID" />
+			<RadzenDataGridColumn TItem="AppliancesOwned" Property="quantity" Title="Quantity" />
+			<RadzenDataGridColumn TItem="AppliancesOwned" Property="retailPrice" Title="Retail Price" />
+		</Columns>
 
-</RadzenDataGrid>
+	</RadzenDataGrid>
+}
+else if (tableViewed == "Company")
+{
+	<h5>Company Table</h5>
 
-<br/>
-
-<h5>Home Table</h5>
-
-<RadzenDataGrid Data="@Homes" TItem="Home" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+	<RadzenDataGrid Data="@Companies" TItem="Company" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
 				AllowMultiColumnSorting="true" AllowFiltering="true">
-	<Columns>
-		<RadzenDataGridColumn TItem="Home" Property="HomeID" Title="Home ID" />
-		<RadzenDataGridColumn TItem="Home" Property="FloorSpace" Title="FloorSpace" />
-		<RadzenDataGridColumn TItem="Home" Property="Floors" Title="Floors" />
-		<RadzenDataGridColumn TItem="Home" Property="Bedroooms" Title="Bedrooms" />
-		<RadzenDataGridColumn TItem="Home" Property="LandSize" Title="LandSize" />
-		<RadzenDataGridColumn TItem="Home" Property="YearConstructed" Title="Year Constructed" />
-		<RadzenDataGridColumn TItem="Home" Property="HomeType" Title="Home Type" />
-		<RadzenDataGridColumn TItem="Home" Property="ExtraFeatures" Title="Extra Features" />
-		<RadzenDataGridColumn TItem="Home" Property="UnitNum" Title="Unit No." />
-		<RadzenDataGridColumn TItem="Home" Property="UnitNum">
-			<Template>
+		<Columns>
+			<RadzenDataGridColumn TItem="Company" Property="companyName" Title="Company Name" />
+			<RadzenDataGridColumn TItem="Company" Property="officeID" Title="Office ID" />
+			<RadzenDataGridColumn TItem="Company" Property="cityName" Title="City Name" />
+		</Columns>
 
-			</Template>
-		</RadzenDataGridColumn>
-	</Columns>
-</RadzenDataGrid>
+	</RadzenDataGrid>
+}
+else if (tableViewed == "County")
+{
+	<h5>Counties Table</h5>
 
-<br />
-
-<h5>Home Owner Table</h5>
-
-<RadzenDataGrid Data="@HomeOwners" TItem="HomeOwner" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+	<RadzenDataGrid Data="@Counties" TItem="County" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
 				AllowMultiColumnSorting="true" AllowFiltering="true">
-	<Columns>
-		<RadzenDataGridColumn TItem="HomeOwner" Property="SSN" Title="SSN" />
-		<RadzenDataGridColumn TItem="HomeOwner" Property="HomeID" Title="Home ID" />
-		<RadzenDataGridColumn TItem="HomeOwner" Property="FirstName" Title="First Name" />
-		<RadzenDataGridColumn TItem="HomeOwner" Property="LastName" Title="Last Name" />
-		<RadzenDataGridColumn TItem="HomeOwner" Property="Dependents" Title="Dependents" />
-		<RadzenDataGridColumn TItem="HomeOwner" Property="Income" Title="Income" />
-		<RadzenDataGridColumn TItem="HomeOwner" Property="Age" Title="Age" />
-		<RadzenDataGridColumn TItem="HomeOwner" Property="Proffession" Title="Proffession" />
-		<RadzenDataGridColumn TItem="HomeOwner" Property="IsCurrentOwner" Title="Current Owner" />
-	</Columns>
-</RadzenDataGrid>
+		<Columns>
+			<RadzenDataGridColumn TItem="County" Property="countyName" Title="County Name" />
+			<RadzenDataGridColumn TItem="County" Property="cityName" Title="City Name" />
+			<RadzenDataGridColumn TItem="County" Property="cityPop" Title="City Pop" />
+		</Columns>
 
-<br />
+	</RadzenDataGrid>
+}
+else if (tableViewed == "Employee")
+{
+	<h5>Employee Table</h5>
 
-<h5>Listing Table</h5>
-
-<RadzenDataGrid Data="@Listings" TItem="Listing" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+	<RadzenDataGrid Data="@Employees" TItem="Employee" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
 				AllowMultiColumnSorting="true" AllowFiltering="true">
-	<Columns>
-		<RadzenDataGridColumn TItem="Listing" Property="OwnerId" Title="Owner ID" />
-		<RadzenDataGridColumn TItem="Listing" Property="EmployeeID" Title="Employee ID" />
-		<RadzenDataGridColumn TItem="Listing" Property="HomeId" Title="Home ID" />
-		<RadzenDataGridColumn TItem="Listing" Property="AvalibleStartDate" Title="Avalible Start Date" />
-		<RadzenDataGridColumn TItem="Listing" Property="AvalibleEndDate" Title="Avalible End Date" />
-		<RadzenDataGridColumn TItem="Listing" Property="ListingPrice" Title="Listing Price" />
-		<RadzenDataGridColumn TItem="Listing" Property="IsSold" Title="Is Sold" />
-		<RadzenDataGridColumn TItem="Listing" Property="SoldTo" Title="Sold To" />
-	</Columns>
-</RadzenDataGrid>
+		<Columns>
+			<RadzenDataGridColumn TItem="Employee" Property="employeeID" Title="Employee Id" />
+			<RadzenDataGridColumn TItem="Employee" Property="companyName" Title="Company Name" />
+			<RadzenDataGridColumn TItem="Employee" Property="agentID" Title="Agent ID" />
+			<RadzenDataGridColumn TItem="Employee" Property="commissionRate" Title="Commision Rate" />
+		</Columns>
 
-<br />
+	</RadzenDataGrid>
+}
+else if (tableViewed == "Homes")
+{
+	<h5>Home Table</h5>
 
-<h5>Location Table</h5>
-
-<RadzenDataGrid Data="@Locations" TItem="Location" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+	<RadzenDataGrid Data="@Homes" TItem="Home" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
 				AllowMultiColumnSorting="true" AllowFiltering="true">
-	<Columns>
-		<RadzenDataGridColumn TItem="Location" Property="HomeID" Title="Home ID" />
-		<RadzenDataGridColumn TItem="Location" Property="CityName" Title="City Name" />
-		<RadzenDataGridColumn TItem="Location" Property="Street" Title="Street" />
-		<RadzenDataGridColumn TItem="Location" Property="ZipCode" Title="Zip Code" />
-		<RadzenDataGridColumn TItem="Location" Property="UnitNum" Title="Unit No." />
-	</Columns>
-</RadzenDataGrid>
+		<Columns>
+			<RadzenDataGridColumn TItem="Home" Property="homeID" Title="Home ID" />
+			<RadzenDataGridColumn TItem="Home" Property="floorSpace" Title="FloorSpace" />
+			<RadzenDataGridColumn TItem="Home" Property="floors" Title="Floors" />
+			<RadzenDataGridColumn TItem="Home" Property="bedRooms" Title="Bedrooms" />
+			<RadzenDataGridColumn TItem="Home" Property="bathRooms" Title="Bathrooms" />
+			<RadzenDataGridColumn TItem="Home" Property="landSize" Title="LandSize" />
+			<RadzenDataGridColumn TItem="Home" Property="yearConstructed" Title="Year Constructed" />
+			<RadzenDataGridColumn TItem="Home" Property="homeType" Title="Home Type" />
+			<RadzenDataGridColumn TItem="Home" Property="extraFeatures" Title="Extra Features" />
+			<RadzenDataGridColumn TItem="Home" Property="unitNum" Title="Unit No." />
+		</Columns>
+	</RadzenDataGrid>
 
-<br />
+}
+else if (tableViewed == "Home Owners")
+{
+	<h5>Home Owner Table</h5>
 
-<h5>Sales Made Table</h5>
-
-<RadzenDataGrid Data="@SalesMadeList" TItem="SalesMade" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+	<RadzenDataGrid Data="@HomeOwners" TItem="HomeOwner" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
 				AllowMultiColumnSorting="true" AllowFiltering="true">
-	<Columns>
-		<RadzenDataGridColumn TItem="SalesMade" Property="HomeID" Title="Home ID" />
-		<RadzenDataGridColumn TItem="SalesMade" Property="CityName" Title="City Name" />
-		<RadzenDataGridColumn TItem="SalesMade" Property="Street" Title="Street" />
-		<RadzenDataGridColumn TItem="SalesMade" Property="ZipCode" Title="Zip Code" />
-		<RadzenDataGridColumn TItem="SalesMade" Property="UnitNum" Title="Unit No." />
-	</Columns>
-</RadzenDataGrid>
+		<Columns>
+			<RadzenDataGridColumn TItem="HomeOwner" Property="SSN" Title="SSN" />
+			<RadzenDataGridColumn TItem="HomeOwner" Property="homeID" Title="Home ID" />
+			<RadzenDataGridColumn TItem="HomeOwner" Property="firstName" Title="First Name" />
+			<RadzenDataGridColumn TItem="HomeOwner" Property="lastName" Title="Last Name" />
+			<RadzenDataGridColumn TItem="HomeOwner" Property="dependents" Title="Dependents" />
+			<RadzenDataGridColumn TItem="HomeOwner" Property="income" Title="Income" />
+			<RadzenDataGridColumn TItem="HomeOwner" Property="age" Title="Age" />
+			<RadzenDataGridColumn TItem="HomeOwner" Property="profession" Title="Proffession" />
+			<RadzenDataGridColumn TItem="HomeOwner" Property="isCurrentOwner" Title="Current Owner" />
+		</Columns>
+	</RadzenDataGrid>
+}
+else if (tableViewed == "Listings")
+{
+	<h5>Listing Table</h5>
 
-<br/>
+	<RadzenDataGrid Data="@Listings" TItem="Listing" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+				AllowMultiColumnSorting="true" AllowFiltering="true">
+		<Columns>
+			<RadzenDataGridColumn TItem="Listing" Property="ownerID" Title="Owner ID" />
+			<RadzenDataGridColumn TItem="Listing" Property="employeeID" Title="Employee ID" />
+			<RadzenDataGridColumn TItem="Listing" Property="homeID" Title="Home ID" />
+			<RadzenDataGridColumn TItem="Listing" Property="availableStartDate" Title="Avalible Start Date" />
+			<RadzenDataGridColumn TItem="Listing" Property="availableEndDate" Title="Avalible End Date" />
+			<RadzenDataGridColumn TItem="Listing" Property="listingPrice" Title="Listing Price" />
+			<RadzenDataGridColumn TItem="Listing" Property="isSold" Title="Is Sold" />
+			<RadzenDataGridColumn TItem="Listing" Property="soldTo" Title="Sold To" />
+		</Columns>
+	</RadzenDataGrid>
+}
+else if (tableViewed == "Locations")
+{
+	<h5>Location Table</h5>
+
+	<RadzenDataGrid Data="@Locations" TItem="Location" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+				AllowMultiColumnSorting="true" AllowFiltering="true">
+		<Columns>
+			<RadzenDataGridColumn TItem="Location" Property="homeID" Title="Home ID" />
+			<RadzenDataGridColumn TItem="Location" Property="cityName" Title="City Name" />
+			<RadzenDataGridColumn TItem="Location" Property="street" Title="Street" />
+			<RadzenDataGridColumn TItem="Location" Property="zipCode" Title="Zip Code" />
+			<RadzenDataGridColumn TItem="Location" Property="unitNum" Title="Unit No." />
+		</Columns>
+	</RadzenDataGrid>
+}
+else if (tableViewed == "Sales Made")
+{
+	<h5>Sales Made Table</h5>
+
+	<RadzenDataGrid Data="@SalesMadeList" TItem="SalesMade" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+				AllowMultiColumnSorting="true" AllowFiltering="true">
+		<Columns>
+			<RadzenDataGridColumn TItem="SalesMade" Property="ownerID" Title="Owner ID" />
+			<RadzenDataGridColumn TItem="SalesMade" Property="employeeID" Title="Employee ID" />
+			<RadzenDataGridColumn TItem="SalesMade" Property="homeID" Title="Home ID" />
+			<RadzenDataGridColumn TItem="SalesMade" Property="ownerStartDate" Title="Owner Start Date" />
+			<RadzenDataGridColumn TItem="SalesMade" Property="ownerEndDate" Title="Owner End Date" />
+			<RadzenDataGridColumn TItem="SalesMade" Property="salePrice" Title="Sale Price" />
+		</Columns>
+	</RadzenDataGrid>
+}
+
+
+
+@code{
+	public string tableViewed { get; set; } = "Homes";
+}
+
+
 
 @code {
 	protected override async Task OnInitializedAsync()

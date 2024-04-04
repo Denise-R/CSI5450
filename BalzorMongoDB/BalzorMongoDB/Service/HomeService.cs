@@ -17,13 +17,13 @@ namespace BalzorMongoDB.Service
 		}
 		public string Delete(string homeID)
 		{
-			_homeTable.DeleteOne(x => x.id == homeID);
+			_homeTable.DeleteOne(x => x._id == homeID);
 			return "Deleted";
 		}
 
 		public Home GetHome(string homeID)
 		{
-			return _homeTable.Find(x => x.id == homeID).FirstOrDefault();
+			return _homeTable.Find(x => x._id == homeID).FirstOrDefault();
 		}
 
 		public List<Home> GetHomes()
@@ -33,14 +33,14 @@ namespace BalzorMongoDB.Service
 
 		public void SaveOrUpdate(Home home)
 		{
-			var homeObj = _homeTable.Find(x => x.id == home.id).FirstOrDefault();
+			var homeObj = _homeTable.Find(x => x._id == home._id).FirstOrDefault();
 			if (homeObj == null)
 			{
 				_homeTable.InsertOne(home);
 			}
 			else
 			{
-				_homeTable.ReplaceOne(x => x.id == home.id, home);
+				_homeTable.ReplaceOne(x => x._id == home._id, home);
 			}
 		}
 	}

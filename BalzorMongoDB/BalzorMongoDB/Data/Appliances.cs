@@ -10,11 +10,10 @@ namespace BalzorMongoDB.Data
 	public class Appliances
 	{
 		[BsonRepresentation(BsonType.ObjectId)]
-		public string id { get; set; } = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-		public int ModelNameNum { get; set; } = 0;
-		public string Manufacturer { get; set; } = "";
-		public string ApplianceName { get; set; } = "";
-		public float AppliancePrice { get; set; } = 0;
-		public int YearConstructed { get; set; } = 0;
+		public string _id { get; set; } = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+		public int modelNameNum { get; set; } = 0;
+		public string manufacturer { get; set; } = "";
+		public string applianceName { get; set; } = "";
+		public float appliancePrice { get; set; } = 0;
 	}
 }

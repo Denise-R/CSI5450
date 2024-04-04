@@ -10,11 +10,11 @@ namespace BalzorMongoDB.Data
 	public class Location
 	{
 		[BsonRepresentation(BsonType.ObjectId)]
-		public string id { get; set; } = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-		public int HomeID { get; set; } = 0;
-		public string CityName { get; set; } = "";
-		public string Street { get; set; } = "";
-		public int ZipCode { get; set; } = 0;
-		public int UnitNum { get; set; } = 0;
+		public string _id { get; set; } = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+		public int homeID { get; set; } = 0;
+		public string cityName { get; set; } = "";
+		public string street { get; set; } = "";
+		public int zipCode { get; set; } = 0;
+		public int unitNum { get; set; } = 0;
 	}
 }

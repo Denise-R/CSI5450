@@ -17,13 +17,13 @@ namespace BalzorMongoDB.Service
 		}
 		public string Delete(string appliancesID)
 		{
-			_appliancesTable.DeleteOne(x => x.id == appliancesID);
+			_appliancesTable.DeleteOne(x => x._id == appliancesID);
 			return "Deleted";
 		}
 
 		public Appliances GetAppliance(string appliancesID)
 		{
-			return _appliancesTable.Find(x => x.id == appliancesID).FirstOrDefault();
+			return _appliancesTable.Find(x => x._id == appliancesID).FirstOrDefault();
 		}
 
 		public List<Appliances> GetAppliances()
@@ -33,14 +33,14 @@ namespace BalzorMongoDB.Service
 
 		public void SaveOrUpdate(Appliances appliances)
 		{
-			var appliancesObj = _appliancesTable.Find(x => x.id == appliances.id).FirstOrDefault();
+			var appliancesObj = _appliancesTable.Find(x => x._id == appliances._id).FirstOrDefault();
 			if (appliancesObj == null)
 			{
 				_appliancesTable.InsertOne(appliances);
 			}
 			else
 			{
-				_appliancesTable.ReplaceOne(x => x.id == appliances.id, appliances);
+				_appliancesTable.ReplaceOne(x => x._id == appliances._id, appliances);
 			}
 		}
 	}

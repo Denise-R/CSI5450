@@ -10,9 +10,9 @@ namespace BalzorMongoDB.Data
 	public class Agent
 	{
 		[BsonRepresentation(BsonType.ObjectId)]
-		public string id { get; set; } = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-		public int AgentID { get; set; } = 0;
-		public string FirstName { get; set; } = "";
-		public string LastName { get; set; } = "";
+		public string _id { get; set; } = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+		public int agentID { get; set; } = 0;
+		public string firstName { get; set; } = "";
+		public string lastName { get; set; } = "";
 	}
 }

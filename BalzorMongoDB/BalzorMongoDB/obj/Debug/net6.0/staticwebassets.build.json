@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "rowVQNAw82QWRealGlCRj53gprPasJ0tplCISJUsZGE=",
+  "Hash": "psAF6THsbYjhzYpupB8NUKroy17t7l8AKDftlGlfdoI=",
   "Source": "BalzorMongoDB",
   "BasePath": "_content/BalzorMongoDB",
   "Mode": "Default",
@@ -10,7 +10,7 @@
     {
       "Name": "BalzorMongoDB\\wwwroot",
       "Source": "BalzorMongoDB",
-      "ContentRoot": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
       "BasePath": "_content/BalzorMongoDB",
       "Pattern": "**"
     }
@@ -850,10 +850,10 @@
       "OriginalItemSpec": "C:\\Users\\denis\\.nuget\\packages\\radzen.blazor\\4.28.8\\staticwebassets\\Radzen.Blazor.js"
     },
     {
-      "Identity": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\obj\\Debug\\net6.0\\scopedcss\\bundle\\BalzorMongoDB.styles.css",
+      "Identity": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\obj\\Debug\\net6.0\\scopedcss\\bundle\\BalzorMongoDB.styles.css",
       "SourceId": "BalzorMongoDB",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\obj\\Debug\\net6.0\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\obj\\Debug\\net6.0\\scopedcss\\bundle\\",
       "BasePath": "_content/BalzorMongoDB",
       "RelativePath": "BalzorMongoDB.styles.css",
       "AssetKind": "All",
@@ -864,13 +864,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\obj\\Debug\\net6.0\\scopedcss\\bundle\\BalzorMongoDB.styles.css"
+      "OriginalItemSpec": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\obj\\Debug\\net6.0\\scopedcss\\bundle\\BalzorMongoDB.styles.css"
     },
     {
-      "Identity": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\BalzorMongoDB.bundle.scp.css",
+      "Identity": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\BalzorMongoDB.bundle.scp.css",
       "SourceId": "BalzorMongoDB",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/BalzorMongoDB",
       "RelativePath": "BalzorMongoDB.bundle.scp.css",
       "AssetKind": "All",
@@ -881,13 +881,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\BalzorMongoDB.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\BalzorMongoDB.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "Identity": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "SourceId": "BalzorMongoDB",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
       "BasePath": "_content/BalzorMongoDB",
       "RelativePath": "css/bootstrap/bootstrap.min.css",
       "AssetKind": "All",
@@ -901,10 +901,10 @@
       "OriginalItemSpec": "wwwroot\\css\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "Identity": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "BalzorMongoDB",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
       "BasePath": "_content/BalzorMongoDB",
       "RelativePath": "css/bootstrap/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -918,10 +918,10 @@
       "OriginalItemSpec": "wwwroot\\css\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
+      "Identity": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
       "SourceId": "BalzorMongoDB",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
       "BasePath": "_content/BalzorMongoDB",
       "RelativePath": "css/open-iconic/font/css/open-iconic-bootstrap.min.css",
       "AssetKind": "All",
@@ -935,10 +935,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
+      "Identity": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
       "SourceId": "BalzorMongoDB",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
       "BasePath": "_content/BalzorMongoDB",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.eot",
       "AssetKind": "All",
@@ -952,10 +952,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot"
     },
     {
-      "Identity": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
+      "Identity": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
       "SourceId": "BalzorMongoDB",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
       "BasePath": "_content/BalzorMongoDB",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.otf",
       "AssetKind": "All",
@@ -969,10 +969,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf"
     },
     {
-      "Identity": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
+      "Identity": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
       "SourceId": "BalzorMongoDB",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
       "BasePath": "_content/BalzorMongoDB",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.svg",
       "AssetKind": "All",
@@ -986,10 +986,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg"
     },
     {
-      "Identity": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
+      "Identity": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
       "SourceId": "BalzorMongoDB",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
       "BasePath": "_content/BalzorMongoDB",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.ttf",
       "AssetKind": "All",
@@ -1003,10 +1003,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf"
     },
     {
-      "Identity": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
+      "Identity": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
       "SourceId": "BalzorMongoDB",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
       "BasePath": "_content/BalzorMongoDB",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.woff",
       "AssetKind": "All",
@@ -1020,10 +1020,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff"
     },
     {
-      "Identity": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
+      "Identity": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
       "SourceId": "BalzorMongoDB",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
       "BasePath": "_content/BalzorMongoDB",
       "RelativePath": "css/open-iconic/FONT-LICENSE",
       "AssetKind": "All",
@@ -1037,10 +1037,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\FONT-LICENSE"
     },
     {
-      "Identity": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
+      "Identity": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
       "SourceId": "BalzorMongoDB",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
       "BasePath": "_content/BalzorMongoDB",
       "RelativePath": "css/open-iconic/ICON-LICENSE",
       "AssetKind": "All",
@@ -1054,10 +1054,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\ICON-LICENSE"
     },
     {
-      "Identity": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\css\\open-iconic\\README.md",
+      "Identity": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\css\\open-iconic\\README.md",
       "SourceId": "BalzorMongoDB",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
       "BasePath": "_content/BalzorMongoDB",
       "RelativePath": "css/open-iconic/README.md",
       "AssetKind": "All",
@@ -1071,10 +1071,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\README.md"
     },
     {
-      "Identity": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\css\\site.css",
+      "Identity": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\css\\site.css",
       "SourceId": "BalzorMongoDB",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
       "BasePath": "_content/BalzorMongoDB",
       "RelativePath": "css/site.css",
       "AssetKind": "All",
@@ -1088,10 +1088,10 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\favicon.ico",
+      "Identity": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\favicon.ico",
       "SourceId": "BalzorMongoDB",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
       "BasePath": "_content/BalzorMongoDB",
       "RelativePath": "favicon.ico",
       "AssetKind": "All",

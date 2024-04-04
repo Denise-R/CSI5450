@@ -17,13 +17,13 @@ namespace BalzorMongoDB.Service
 		}
 		public string Delete(string companyID)
 		{
-			_companyTable.DeleteOne(x => x.id == companyID);
+			_companyTable.DeleteOne(x => x._id == companyID);
 			return "Deleted";
 		}
 
 		public Company GetCompany(string companyID)
 		{
-			return _companyTable.Find(x => x.id == companyID).FirstOrDefault();
+			return _companyTable.Find(x => x._id == companyID).FirstOrDefault();
 		}
 
 		public List<Company> GetCompanies()
@@ -33,14 +33,14 @@ namespace BalzorMongoDB.Service
 
 		public void SaveOrUpdate(Company company)
 		{
-			var companyObj = _companyTable.Find(x => x.id == company.id).FirstOrDefault();
+			var companyObj = _companyTable.Find(x => x._id == company._id).FirstOrDefault();
 			if (companyObj == null)
 			{
 				_companyTable.InsertOne(company);
 			}
 			else
 			{
-				_companyTable.ReplaceOne(x => x.id == company.id, company);
+				_companyTable.ReplaceOne(x => x._id == company._id, company);
 			}
 		}
 	}

@@ -10,16 +10,16 @@ namespace BalzorMongoDB.Data
 	public class Home
 	{
 		[BsonRepresentation(BsonType.ObjectId)]
-		public string id { get; set; } = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-		public int HomeID { get; set; } = 0;
-		public int FloorSpace { get; set; } = 0;
-		public int Floors { get; set; } = 0;
-		public int Bedrooms { get; set; } = 0;
-		public double Bathrooms { get; set; } = 0;
-		public int LandSize { get; set; } = 0;
-		public int YearConstructed { get; set; } = 0;
-		public string HomeType { get; set; } = "";
-		public string ExtraFeatures { get; set; } = "";
-		public int UnitNum { get; set; } = 0;
+		public string _id { get; set; } = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+		public int homeID { get; set; } = 0;
+		public int floorSpace { get; set; } = 0;
+		public int floors { get; set; } = 0;
+		public int bedRooms { get; set; } = 0;
+		public double bathRooms { get; set; } = 0;
+		public int landSize { get; set; } = 0;
+		public int yearConstructed { get; set; } = 0;
+		public string homeType { get; set; } = "";
+		public string extraFeatures { get; set; } = "";
+		public int unitNum { get; set; } = 0;
 	}
 }

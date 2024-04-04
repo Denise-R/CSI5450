@@ -17,13 +17,13 @@ namespace BalzorMongoDB.Service
 		}
 		public string Delete(string employeeID)
 		{
-			_employeeTable.DeleteOne(x => x.id == employeeID);
+			_employeeTable.DeleteOne(x => x._id == employeeID);
 			return "Deleted";
 		}
 
 		public Employee GetEmployee(string employeeID)
 		{
-			return _employeeTable.Find(x => x.id == employeeID).FirstOrDefault();
+			return _employeeTable.Find(x => x._id == employeeID).FirstOrDefault();
 		}
 
 		public List<Employee> GetEmployees()
@@ -33,14 +33,14 @@ namespace BalzorMongoDB.Service
 
 		public void SaveOrUpdate(Employee employee)
 		{
-			var employeeObj = _employeeTable.Find(x => x.id == employee.id).FirstOrDefault();
+			var employeeObj = _employeeTable.Find(x => x._id == employee._id).FirstOrDefault();
 			if (employeeObj == null)
 			{
 				_employeeTable.InsertOne(employee);
 			}
 			else
 			{
-				_employeeTable.ReplaceOne(x => x.id == employee.id, employee);
+				_employeeTable.ReplaceOne(x => x._id == employee._id, employee);
 			}
 		}
 	}

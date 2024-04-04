@@ -17,13 +17,13 @@ namespace BalzorMongoDB.Service
 		}
 		public string Delete(string locationID)
 		{
-			_locationTable.DeleteOne(x => x.id == locationID);
+			_locationTable.DeleteOne(x => x._id == locationID);
 			return "Deleted";
 		}
 
 		public Location GetLocation(string locationID)
 		{
-			return _locationTable.Find(x => x.id == locationID).FirstOrDefault();
+			return _locationTable.Find(x => x._id == locationID).FirstOrDefault();
 		}
 
 		public List<Location> GetLocations()
@@ -33,14 +33,14 @@ namespace BalzorMongoDB.Service
 
 		public void SaveOrUpdate(Location location)
 		{
-			var locationObj = _locationTable.Find(x => x.id == location.id).FirstOrDefault();
+			var locationObj = _locationTable.Find(x => x._id == location._id).FirstOrDefault();
 			if (locationObj == null)
 			{
 				_locationTable.InsertOne(location);
 			}
 			else
 			{
-				_locationTable.ReplaceOne(x => x.id == location.id, location);
+				_locationTable.ReplaceOne(x => x._id == location._id, location);
 			}
 		}
 	}

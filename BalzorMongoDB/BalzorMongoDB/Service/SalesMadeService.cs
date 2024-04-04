@@ -17,13 +17,13 @@ namespace BalzorMongoDB.Service
 		}
 		public string Delete(string salesMadeID)
 		{
-			_salesMadeTable.DeleteOne(x => x.id == salesMadeID);
+			_salesMadeTable.DeleteOne(x => x._id == salesMadeID);
 			return "Deleted";
 		}
 
 		public SalesMade GetSaleMade(string salesMadeID)
 		{
-			return _salesMadeTable.Find(x => x.id == salesMadeID).FirstOrDefault();
+			return _salesMadeTable.Find(x => x._id == salesMadeID).FirstOrDefault();
 		}
 
 		public List<SalesMade> GetSalesMade()
@@ -33,14 +33,14 @@ namespace BalzorMongoDB.Service
 
 		public void SaveOrUpdate(SalesMade salesMade)
 		{
-			var salesMadeObj = _salesMadeTable.Find(x => x.id == salesMade.id).FirstOrDefault();
+			var salesMadeObj = _salesMadeTable.Find(x => x._id == salesMade._id).FirstOrDefault();
 			if (salesMadeObj == null)
 			{
 				_salesMadeTable.InsertOne(salesMade);
 			}
 			else
 			{
-				_salesMadeTable.ReplaceOne(x => x.id == salesMade.id, salesMade);
+				_salesMadeTable.ReplaceOne(x => x._id == salesMade._id, salesMade);
 			}
 		}
 	}

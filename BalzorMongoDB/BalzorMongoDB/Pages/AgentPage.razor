@@ -8,14 +8,9 @@
 <RadzenDataGrid Data="@Agents" TItem="Agent" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
 				AllowMultiColumnSorting="true" AllowFiltering="true">
 	<Columns>
-		<RadzenDataGridColumn TItem="Agent" Property="AgentID" Title="Agent ID" />
-		<RadzenDataGridColumn TItem="Agent" Property="FirstName" Title="First Name" />
-		<RadzenDataGridColumn TItem="Agent" Property="LastName" Title="Last Name" />
-		<RadzenDataGridColumn TItem="Agent" Property="LastName" Title="Last Name">
-			<Template>
-
-			</Template>
-		</RadzenDataGridColumn>
+		<RadzenDataGridColumn TItem="Agent" Property="agentID" Title="Agent ID" />
+		<RadzenDataGridColumn TItem="Agent" Property="firstName" Title="First Name" />
+		<RadzenDataGridColumn TItem="Agent" Property="lastName" Title="Last Name" />
 	</Columns>
 
 </RadzenDataGrid>

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "02Rl/gVVowa0+cG2LDzigkasSzeOB2lbwkSCY+FVZMpC8nghiZo3CspdUDdH8htUpWl6oFtFvpH80V22nUNZvA==",
+  "dgSpecHash": "uvNyIyl9+6jVgLRKvMhjjlUzkK4Blra7orRp5nSPVEHIIDW3YudwOGK39PmRwXCfcn/pVVWmcoh+xPWC9WUxrg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\denis\\source\\repos\\BalzorMongoDB\\BalzorMongoDB\\BalzorMongoDB.csproj",
+  "projectFilePath": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\BalzorMongoDB.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\denis\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\denis\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",

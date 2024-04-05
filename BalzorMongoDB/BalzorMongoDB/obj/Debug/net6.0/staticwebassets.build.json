@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "psAF6THsbYjhzYpupB8NUKroy17t7l8AKDftlGlfdoI=",
+  "Hash": "7spxFDh9tBxLHApKFIPumwldSssG0/xMrC+4QjNnRfw=",
   "Source": "BalzorMongoDB",
   "BasePath": "_content/BalzorMongoDB",
   "Mode": "Default",
@@ -1103,6 +1103,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\Images\\home.jpg",
+      "SourceId": "BalzorMongoDB",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\",
+      "BasePath": "_content/BalzorMongoDB",
+      "RelativePath": "Images/home.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\home.jpg"
     }
   ]
 }

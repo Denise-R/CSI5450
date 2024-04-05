@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\BalzorMongoDB.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\Images\\home.jpg",
+      "PackagePath": "staticwebassets\\Images\\home.jpg"
+    },
+    {
       "Id": "C:\\Users\\denis\\Documents\\GitHub\\CSI5450\\BalzorMongoDB\\BalzorMongoDB\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
     },

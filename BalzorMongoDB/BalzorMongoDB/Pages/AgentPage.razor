@@ -1,52 +1,245 @@
-﻿@page "/AgentTable"
+﻿@page "/AddAgent"
 @using Radzen.Blazor
 @using BalzorMongoDB.Data
 @inject BalzorMongoDB.IService.IAgent agentService
+@inject BalzorMongoDB.IService.ICompany companyService
+@inject BalzorMongoDB.IService.IEmployee employeeService
 
-<PageTitle>Agent Table</PageTitle>
+<h3>Add a Agent</h3>
 
-<RadzenDataGrid Data="@Agents" TItem="Agent" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+<div class="col-md-12">
+	<div class="h-100 p-3 bg-white border rounded"
+		<div class="row">
+			<div class="col-md-2">
+				<div class="md-3">
+					<label class="form-label fw-bold">Agent ID</label>
+					<input type="number" min="0" class="form-control" @bind="agent.agentID" style="width:100%;" placeholder="1001" />
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="md-3">
+					<label class="form-label fw-bold">First Name</label>
+					<input type="text" class="form-control" @bind="agent.firstName" style="width:100%;" placeholder="John" />
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="md-3">
+					<label class="form-label fw-bold">Last Name</label>
+					<input type="text" class="form-control" @bind="agent.lastName" style="width:100%;" placeholder="Smith" />
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="md-3">
+					<label class="form-label fw-bold">Commision Rate</label>
+					<input type="number"  min="0.01" class="form-control" @bind="employee.commissionRate" style="width:100%;" placeholder="0.05" />
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="md-3">
+					<label class="form-label fw-bold" >Company Name</label>
+					<select name="one" class="form-select" aria-label="Site" @bind="employee.companyName" placeholder="Coastal Living Realty">
+						<option value="Coastal Living Realty">Coastal Living Realty</option>
+						<option value="Dream Homes Realty">Dream Homes Realty</option>
+						<option value="Elite Properties Group">Elite Properties Group</option>
+						<option value="Evergreen Estates Agency">Evergreen Estates Agency</option>
+						<option value="Summit Real Estate Solutions">Summit Real Estate Solutions</option>
+					</select>
+				</div>
+			</div>
+		</div>	
+
+		<div class="row">
+			<div class="col-md-2">
+				<div class="md-2">
+					<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
+					<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> Save())">Save</button>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="md-2">
+					<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
+					<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> ResetAgent())">Reset</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br />
+<br />
+<br/>
+
+<div class="col-md-2">
+	<div class="mb-3">
+		<label class="form-check-label fw-bold">Select Table View</label>
+		<select class="form-select" @bind="tableViewed">
+			<option value="Agent">Agent</option>
+			<option value="Company">Company</option>
+			<option value="Employee">Employee</option>
+		</select>
+	</div>
+</div>
+<br />
+
+@if (tableViewed == "Agent")
+{
+
+		<label class="form-check-label fw-bold">Agents Table</label>
+
+		<RadzenDataGrid Data="@Agents" TItem="Agent" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
 				AllowMultiColumnSorting="true" AllowFiltering="true">
-	<Columns>
-		<RadzenDataGridColumn TItem="Agent" Property="agentID" Title="Agent ID" />
-		<RadzenDataGridColumn TItem="Agent" Property="firstName" Title="First Name" />
-		<RadzenDataGridColumn TItem="Agent" Property="lastName" Title="Last Name" />
-	</Columns>
+			<Columns>
+				<RadzenDataGridColumn TItem="Agent" Property="agentID" Title="Agent ID" />
+				<RadzenDataGridColumn TItem="Agent" Property="firstName" Title="First Name" />
+				<RadzenDataGridColumn TItem="Agent" Property="lastName" Title="Last Name" />
+			</Columns>
+		</RadzenDataGrid>
+}
+else if (tableViewed == "Company")
+{
+	<h5>Company Table</h5>
 
-</RadzenDataGrid>
+	<RadzenDataGrid Data="@Companies" TItem="Company" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+				AllowMultiColumnSorting="true" AllowFiltering="true">
+		<Columns>
+			<RadzenDataGridColumn TItem="Company" Property="companyName" Title="Company Name" />
+			<RadzenDataGridColumn TItem="Company" Property="officeID" Title="Office ID" />
+			<RadzenDataGridColumn TItem="Company" Property="cityName" Title="City Name" />
+		</Columns>
+
+	</RadzenDataGrid>
+}
+else if (tableViewed == "Employee")
+{
+	<h5>Employee Table</h5>
+
+	<RadzenDataGrid Data="@Employees" TItem="Employee" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+				AllowMultiColumnSorting="true" AllowFiltering="true">
+		<Columns>
+			<RadzenDataGridColumn TItem="Employee" Property="employeeID" Title="Employee Id" />
+			<RadzenDataGridColumn TItem="Employee" Property="companyName" Title="Company Name" />
+			<RadzenDataGridColumn TItem="Employee" Property="agentID" Title="Agent ID" />
+			<RadzenDataGridColumn TItem="Employee" Property="commissionRate" Title="Commision Rate" />
+		</Columns>
+
+	</RadzenDataGrid>
+}
+
+
+
 
 
 
 @code {
-	Agent agent = new Agent();
-	List<Agent> Agents = new List<Agent>();
+	public string tableViewed { get; set; } = "Agent";
+
+	private void Save()
+	{
+		SaveAgent();
+		SaveEmployee();
+	}
+
+	private void Reset()
+	{
+		ResetAgent();
+		ResetEmployee();
+	}
+
 	protected override async Task OnInitializedAsync()
 	{
 		GetAgents();
+		GetCompanies();
+		GetEmployees();
 	}
+}
+
+@code {
+	Agent agent = new Agent();
+	List<Agent> Agents = new List<Agent>();
 
 	private void GetAgents()
 	{
 		Agents = agentService.GetAgents();
 	}
 
-	private void Save()
+	private void SaveAgent()
 	{
 		agentService.SaveOrUpdate(agent);
-		Reset();
+		ResetAgent();
 		GetAgents();
 	}
-	private void Reset()
+	private void ResetAgent()
 	{
 		agent = new Agent();
 	}
-	private void Edit(string agentId)
+	private void EditAgent(string agentId)
 	{
 		agent = agentService.GetAgent(agentId);
 	}
-	private void Delete(string agentId)
+	private void DeleteAgent(string agentId)
 	{
 		agentService.Delete(agentId);
 		GetAgents();
+	}
+}
+
+@code
+{
+	Company company = new Company();
+	List<Company> Companies = new List<Company>();
+
+	private void GetCompanies()
+	{
+		Companies = companyService.GetCompanies();
+	}
+
+	private void SaveCompany()
+	{
+		companyService.SaveOrUpdate(company);
+		ResetCompany();
+		GetCompanies();
+	}
+	private void ResetCompany()
+	{
+		company = new Company();
+	}
+	private void EditCompany(string companyId)
+	{
+		company = companyService.GetCompany(companyId);
+	}
+	private void DeleteCompany(string companyId)
+	{
+		companyService.Delete(companyId);
+		GetCompanies();
+	}
+}
+
+
+@code {
+	Employee employee = new Employee();
+	List<Employee> Employees = new List<Employee>();
+
+	private void GetEmployees()
+	{
+		Employees = employeeService.GetEmployees();
+	}
+
+	private void SaveEmployee()
+	{
+		employeeService.SaveOrUpdate(employee);
+		ResetEmployee();
+		GetEmployees();
+	}
+	private void ResetEmployee()
+	{
+		employee = new Employee();
+	}
+	private void EditEmployee(string employeeId)
+	{
+		employee = employeeService.GetEmployee(employeeId);
+	}
+	private void DeleteEmployee(string employeeId)
+	{
+		employeeService.Delete(employeeId);
+		GetEmployees();
 	}
 }

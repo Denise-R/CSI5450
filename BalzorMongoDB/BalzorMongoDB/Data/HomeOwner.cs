@@ -20,5 +20,14 @@ namespace BalzorMongoDB.Data
 		public int age { get; set; } = 0;
 		public string profession { get; set; } = "";
 		public bool isCurrentOwner { get; set; } = true;
+
+		[BsonIgnore]
+		public string cityName { get; set; } = "";
+		[BsonIgnore]
+		public string street { get; set; } = "";
+		[BsonIgnore]
+		public int zipCode { get; set; } = 0;
+		[BsonIgnore]
+		public int unitNum { get; set; } = 0;
 	}
 }

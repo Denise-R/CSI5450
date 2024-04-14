@@ -1,0 +1,1319 @@
+﻿@page "/FilterRE"
+@using Radzen.Blazor
+@using BalzorMongoDB.Data
+@using MongoDB.Bson;
+@using BalzorMongoDB.IService;
+@using MongoDB.Driver;
+
+<h5>Real Estate Database</h5>
+<br/>
+<br/>
+
+<div class="col-md-3">
+	<div class="mb-3">
+		<label class="form-check-label fw-bold">Select Table View</label>
+		<select class="form-select" @bind="filterSelection">
+			<option value="filter1">Homes per Owner</option>
+			<option value="filter2">Homes Sold Multiple Times</option>
+			<option value="filter3">Most Expensive Home</option>
+			<option value="filter4">Homes Including Appliance</option>
+			<option value="filter5">Homes People Used to Own</option>
+			<option value="filter6">Total Agent Commision</option>
+			<option value="filter7">Appartment and Mansion Owners</option>
+			<option value="filter8">Homes Below a Price</option>
+			<option value="filter9">Most Expensive Home per City</option>
+			<option value="filter10">Homes for Sale</option>
+		</select>
+	</div>
+</div>
+<br />
+<div class="col-md-12">
+	<div class="h-100 p-3 bg-white border rounded">
+		@if (filterSelection == "filter1")
+		{
+			<div class="row">
+				<div class="col-md-2">
+					<div class="md-3">
+						<label class="form-label fw-bold">First Name</label>
+						<input type="text" class="form-control" @bind="fnameVar" style="width:100%;"  />
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="md-3">
+						<label class="form-label fw-bold">Last Name</label>
+						<input type="text" class="form-control" @bind="lnameVar" style="width:100%;" />
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="md-3">
+						<label class="form-label fw-bold">City</label>
+						<input type="text" class="form-control" @bind="cityVar" style="width:100%;" />
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="md-2">
+						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
+						<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> refreshF1())">Submit</button>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="md-2">
+						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
+						<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> Reset())">Reset</button>
+					</div>
+				</div>
+			</div>
+		}
+		@if (filterSelection == "filter2")
+		{
+			<div class="row">
+				<div class="col-md-2">
+					<div class="md-2">
+						<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> refreshF2())">Refresh</button>
+					</div>
+				</div>
+			</div>
+		}
+		@if (filterSelection == "filter3")
+		{
+			<div class="row">
+				<div class="col-md-2">
+					<div class="md-3">
+						<label class="form-label fw-bold">Owner ID</label>
+						<input type="text" class="form-control" @bind="ownerIDVar" style="width:100%;" />
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="md-2">
+						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
+						<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> refreshF3())">Submit</button>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="md-2">
+						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
+						<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> Reset())">Reset</button>
+					</div>
+				</div>
+			</div>
+		}
+		@if (filterSelection == "filter4")
+		{
+			<div class="row">
+				<div class="col-md-2">
+					<div class="md-3">
+						<label class="form-label fw-bold">Manufacturer</label>
+						<input type="text" class="form-control" @bind="manufacturerVar" style="width:100%;" />
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="md-2">
+						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
+						<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> refreshF4())">Submit</button>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="md-2">
+						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
+						<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> Reset())">Reset</button>
+					</div>
+				</div>
+			</div>
+		}
+		@if (filterSelection == "filter5")
+		{
+			<div class="row">
+				<div class="col-md-2">
+					<div class="md-3">
+						<label class="form-label fw-bold">Is Current Owner</label>
+						<select name="one" class="form-select" aria-label="Site" @bind="tableBoolVal">
+							<option value="True">True</option>
+							<option value="False">False</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="md-2">
+						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
+						<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> refreshF5())">Submit</button>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="md-2">
+						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
+						<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> Reset())">Reset</button>
+					</div>
+				</div>
+			</div>
+		}
+		@if (filterSelection == "filter6")
+		{
+			<div class="row">
+				<div class="col-md-2">
+					<div class="md-3">
+						<label class="form-label fw-bold">Employee ID</label>
+						<input type="number" min = "0" class="form-control" @bind="e_idVar" style="width:100%;" />
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="md-2">
+						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
+						<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> refreshF6())">Submit</button>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="md-2">
+						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
+						<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> Reset())">Reset</button>
+					</div>
+				</div>
+			</div>
+		}
+		@if (filterSelection == "filter7")
+		{
+			<div class="row">
+				<div class="col-md-2">
+					<div class="md-2">
+						<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> refreshF7())">Refresh</button>
+					</div>
+				</div>
+			</div>
+		}
+		@if (filterSelection == "filter8")
+		{
+			<div class="row">
+				<div class="col-md-2">
+					<div class="md-3">
+						<label class="form-label fw-bold">City Name</label>
+						<input type="text" class="form-control" @bind="city_8_Var" style="width:100%;" />
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="md-3">
+						<label class="form-label fw-bold">Price</label>
+						<input type="number" min="0" class="form-control" @bind="priceVar" style="width:100%;" />
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="md-2">
+						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
+						<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> refreshF8())">Submit</button>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="md-2">
+						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
+						<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> Reset())">Reset</button>
+					</div>
+				</div>
+			</div>
+		}
+		@if (filterSelection == "filter10")
+		{
+			<div class="row">
+				<div class="col-md-2">
+					<div class="md-3">
+						<label class="form-label fw-bold">City Name</label>
+						<input type="text" class="form-control" @bind="locationVar" style="width:100%;" />
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="md-3">
+						<label class="form-label fw-bold">Is Sold</label>
+						<select name="one" class="form-select" aria-label="Site" @bind="isSoldTableVar">
+							<option value="True">True</option>
+							<option value="False">False</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="md-3">
+						<label class="form-label fw-bold">Bedrooms</label>
+						<input type="number" min="0" class="form-control" @bind="bedRoomsVar" style="width:100%;" />
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="md-3">
+						<label class="form-label fw-bold">Bathrooms</label>
+						<input type="number" min="0" class="form-control" @bind="bathRoomsVar" style="width:100%;" />
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="md-2">
+						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
+						<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> refreshF10())">Submit</button>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="md-2">
+						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
+						<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> Reset())">Reset</button>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+</div>
+<br/>
+<br/>
+
+
+@*
+@if (filterResult4 != null && filterResult4.Any())
+{
+	<table class="table">
+		<thead>
+			<tr>
+				@foreach (var key in filterResult4.FirstOrDefault()?.Names)
+				{
+					<th>@key</th>
+				}
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var document in filterResult4)
+			{
+				var j = 0;
+				<tr>
+					@foreach (var value in document.Values)
+					{
+						@if (j != 0)
+						{
+							<td>@value</td>
+
+						}
+						j += 1;
+					}
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+else
+{
+	<p>No documents to display.</p>
+}*@
+
+@if (filterSelection == "filter1")
+{
+	@if (filterResult1 != null && filterResult1.Any())
+	{
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Floor Space</th>
+					<th>Floors</th>
+					<th>Bedrooms</th>
+					<th>Bathrooms</th>
+					<th>Land Size</th>
+					<th>Year Constructed</th>
+					<th>Home Type</th>
+					<th>Extra Features</th>
+					<th>Unit Number</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var document in filterResult1)
+				{
+					<tr>
+						@foreach (var property in document.Values)
+						{
+							<td>@property["floorSpace"]</td>
+							<td>@property["floors"]</td>
+							<td>@property["bedRooms"]</td>
+							<td>@property["bathRooms"]</td>
+							<td>@property["landSize"]</td>
+							<td>@property["yearConstructed"]</td>
+							<td>@property["homeType"]</td>
+							<td>@property["extraFeatures"]</td>
+							<td>@property["unitNum"]</td>
+						}
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+	else
+	{
+		<p>No documents to display.</p>
+	}
+}
+@if (filterSelection == "filter2")
+{
+	@if (filterResult2 != null && filterResult2.Any())
+	{
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Home ID</th>
+					<th>Sales Count</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var document in filterResult2)
+				{
+					<tr>
+						@foreach (var value in document.Values)
+						{
+							<td>@value</td>
+
+						}
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+	else
+	{
+		<p>No documents to display.</p>
+	}
+}
+@if (filterSelection == "filter3")
+{
+	@if (filterResult3 != null && filterResult3.Any())
+	{
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Owner ID</th>
+					<th>Employee ID</th>
+					<th>Home ID</th>
+					<th>Owner Start Date</th>
+					<th>Owner End Date</th>
+					<th>Sale Price</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var document in filterResult3)
+				{
+					var j = 0;
+					<tr>
+						@foreach (var property in document.Values)
+						{	@if (j != 0)
+							{
+								<td>@property</td>
+							}
+							j += 1;
+						}
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+	else
+	{
+		<p>No documents to display.</p>
+	}
+}
+@if (filterSelection == "filter4")
+{
+	@if (filterResult4 != null && filterResult4.Any())
+	{
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Home ID</th>
+					<th>Floor Space</th>
+					<th>Floors</th>
+					<th>Bedrooms</th>
+					<th>Bathrooms</th>
+					<th>Land Size</th>
+					<th>Year Constructed</th>
+					<th>Home Type</th>
+					<th>Extra Features</th>
+					<th>Unit Number</th>
+					<th>Appliances</th>
+					<th>Appliance Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var home in filterResult4)
+				{
+					<tr>
+						<td>@home["homeID"]</td>
+						<td>@home["floorSpace"]</td>
+						<td>@home["floors"]</td>
+						<td>@home["bedRooms"]</td>
+						<td>@home["bathRooms"]</td>
+						<td>@home["landSize"]</td>
+						<td>@home["yearConstructed"]</td>
+						<td>@home["homeType"]</td>
+						<td>@home["extraFeatures"]</td>
+						<td>@home["unitNum"]</td>
+						<td>
+							@if (home.Contains("appliances") && home["appliances"] is BsonDocument appliances)
+							{
+								var j = 0;
+								foreach (var appliance in appliances.Elements)
+								{
+									if (j != 0)
+									{
+										<ul>
+											<li>@appliance.Name: @appliance.Value</li>
+										</ul>
+									}
+									j += 1;
+								}
+							}
+						</td>
+						<td>
+							@if (home.Contains("applianceDetails") && home["applianceDetails"] is BsonArray applianceDetails)
+							{
+								foreach (var detail in applianceDetails)
+								{
+									var j = 0;
+									@foreach (var element in detail.AsBsonDocument)
+									{
+										@if(j != 0)
+										{
+											<ul>
+												<li>@element.Name: @element.Value</li>
+											</ul>
+										}
+										j += 1;
+									}
+								}
+							}
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+	else
+	{
+		<p>No homes to display.</p>
+	}
+}
+@if (filterSelection == "filter5")
+{
+	@if (filterResult5 != null && filterResult5.Any())
+	{
+		<table class="table">
+			<thead>
+				<tr>
+					<th>SSN</th>
+					<th>Home ID</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Dependents</th>
+					<th>Income</th>
+					<th>Age</th>
+					<th>Profession</th>
+					<th>Is Current Owner</th>
+					<th>Owned Homes</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var person in filterResult5)
+				{
+					<tr>
+						<td>@person["SSN"]</td>
+						<td>@person["homeID"]</td>
+						<td>@person["firstName"]</td>
+						<td>@person["lastName"]</td>
+						<td>@person["dependents"]</td>
+						<td>@person["income"]</td>
+						<td>@person["age"]</td>
+						<td>@person["profession"]</td>
+						<td>@person["isCurrentOwner"]</td>
+						<td>
+							@if (person.Contains("ownedHomes") && person["ownedHomes"] is BsonArray ownedHomes)
+							{
+								foreach (var ownedHome in ownedHomes)
+								{
+									var j = 0;
+									<ul>
+										@foreach (var element in ownedHome.AsBsonDocument)
+										{
+											@if (j != 0)
+											{
+												<li>@element.Name: @element.Value</li>
+
+											}
+											j += 1;
+										}
+									</ul>
+								}
+							}
+							else
+							{
+								<span>No owned homes</span>
+							}
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+	else
+	{
+		<p>No persons to display.</p>
+	}
+}
+@if (filterSelection == "filter6")
+{
+	@if (filterResult6 != null && filterResult6.Any())
+	{
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Owner ID</th>
+					<th>Employee ID</th>
+					<th>Home ID</th>
+					<th>Owner Start Date</th>
+					<th>Owner End Date</th>
+					<th>Sale Price</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var document in filterResult6)
+				{
+					var j = 0;
+					<tr>
+						@foreach (var value in document.Values)
+						{
+							@if (j != 0)
+							{
+								<td>@value</td>
+							}
+							j += 1;
+						}
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+	else
+	{
+		<p>No documents to display.</p>
+	}
+}
+@if (filterSelection == "filter7")
+{
+	@if (filterResult7 != null && filterResult7.Any())
+	{
+		<table class="table">
+			<thead>
+				<tr>
+					<th>SSN</th>
+					<th>Home ID</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Dependents</th>
+					<th>Income</th>
+					<th>Age</th>
+					<th>Profession</th>
+					<th>Is Current Owner</th>
+					<th>Owned Homes</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var person in filterResult7)
+				{
+					<tr>
+						<td>@person["SSN"]</td>
+						<td>@person["homeID"]</td>
+						<td>@person["firstName"]</td>
+						<td>@person["lastName"]</td>
+						<td>@person["dependents"]</td>
+						<td>@person["income"]</td>
+						<td>@person["age"]</td>
+						<td>@person["profession"]</td>
+						<td>@person["isCurrentOwner"]</td>
+						<td>
+							@if (person.Contains("ownedHomes") && person["ownedHomes"] is BsonArray ownedHomes)
+							{
+								foreach (var ownedHome in ownedHomes)
+								{
+									var j = 0;
+									<ul>
+										@foreach (var element in ownedHome.AsBsonDocument)
+										{
+											@if (j != 0)
+											{
+												<li>@element.Name: @element.Value</li>
+
+											}
+											j += 1;
+										}
+									</ul>
+								}
+							}
+							else
+							{
+								<span>No owned homes</span>
+							}
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+	else
+	{
+		<p>No documents to display.</p>
+	}
+}
+@if (filterSelection == "filter8")
+{
+	@if (filterResult8 != null && filterResult8.Any())
+	{
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Home ID</th>
+					<th>Floor Space</th>
+					<th>Floors</th>
+					<th>Bedrooms</th>
+					<th>BathRooms</th>
+					<th>Land Size</th>
+					<th>Year Constructed</th>
+					<th>Home Type</th>
+					<th>Extra Features</th>
+					<th>Unit Number</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var document in filterResult8)
+				{
+					<tr>
+						@foreach (var value in document.Values)
+						{
+							<td>@value["homeID"]</td>
+							<td>@value["floorSpace"]</td>
+							<td>@value["floors"]</td>
+							<td>@value["bedRooms"]</td>
+							<td>@value["bathRooms"]</td>
+							<td>@value["landSize"]</td>
+							<td>@value["yearConstructed"]</td>
+							<td>@value["homeType"]</td>
+							<td>@value["extraFeatures"]</td>
+							<td>@value["unitNum"]</td>
+						}
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+	else
+	{
+		<p>No documents to display.</p>
+	}
+}
+@if (filterSelection == "filter10")
+{
+	@if (filterResult10 != null && filterResult10.Any())
+	{
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Home ID</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var document in filterResult10)
+				{
+					var j = 0;
+					<tr>
+						@foreach (var value in document.Values)
+						{
+							@if (j != 0)
+							{
+								<td>@value</td>
+							}
+							j += 1;
+						}
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+	else
+	{
+		<p>No documents to display.</p>
+	}
+}
+@code {
+	// setting filter selection default
+	public string filterSelection { get; set; } = "filter1";
+
+	// Used to reset all values to 0/default
+	public void Reset()
+	{
+		// filter 1
+		fnameVar = "";
+		lnameVar = "";
+		cityVar = "";
+		// filter 2 -- No vars
+		// filter 3
+		ownerIDVar = "";
+		// filter 4
+		manufacturerVar = "";
+		// filter 5
+		isOwnerVar = true;
+		tableBoolVal = "true";
+		//filter 6
+		e_idVar = 0;
+		// filter 7 -- No vars
+		// filter 8
+		city_8_Var = "";
+		priceVar = 0;
+		// filter 10
+		locationVar = "";
+		isSoldVar = true;
+		isSoldTableVar = "True";
+		bedRoomsVar = 0;
+		bathRoomsVar = 0;
+	}
+}
+
+@code{
+	static public string fnameVar { get; set; } = "Alice";
+	static public string lnameVar { get; set; } = "Johnson";
+	static public string cityVar { get; set; } = "Ann Arbor";
+	List<BsonDocument> filterResult1 = filter1(fnameVar, lnameVar, cityVar);
+
+	public static List<BsonDocument> filter1(string fName, string lName, string city)
+	{
+		MongoClient _mongoClient = new MongoClient("mongodb://127.0.0.1:27017/");
+		IMongoDatabase _database = _mongoClient.GetDatabase("RealEstate");
+		IMongoCollection<HomeOwner> _homeOwnerTable = 
+			_database.GetCollection<HomeOwner>("HomeOwner");
+
+		var _collection = _database.GetCollection<HomeOwner>("HomeOwner");
+
+		BsonDocument pipelineStage1 = new BsonDocument
+		{{
+			"$match", new BsonDocument{
+				{ "firstName", fName },
+				{ "lastName", lName }
+			}
+		}};
+
+		BsonDocument pipelineStage2 = new BsonDocument{
+		{
+			"$lookup", new BsonDocument{
+				{ "from", "Home" },
+				{ "localField", "homeID" },
+				{ "foreignField", "homeID" },
+				{ "as", "ownedHomes" }
+			}
+		}
+		};
+
+		BsonDocument pipelineStage3 = new BsonDocument{
+		{ "$unwind", "$ownedHomes" }
+		};
+
+		BsonDocument pipelineStage4 = new BsonDocument{
+		{
+			"$lookup", new BsonDocument{
+				{ "from", "Location" },
+				{ "localField", "ownedHomes.homeID" },
+				{ "foreignField", "homeID" },
+				{ "as", "homeLocation" }
+			}
+		}};
+
+		BsonDocument pipelineStage5 = new BsonDocument
+		{{
+			"$match", new BsonDocument{
+				{ "homeLocation.cityName", city }
+			}
+		}};
+
+		BsonDocument pipelineStage6 = new BsonDocument{
+		{ "$project", new BsonDocument{
+				{ "ownedHomes", 1 },
+				{ "_id", 0 }
+			}
+		} };
+
+		BsonDocument[] pipeline = new BsonDocument[] {
+			pipelineStage1,
+			pipelineStage2,
+			pipelineStage3,
+			pipelineStage4,
+			pipelineStage5,
+			pipelineStage6
+	};
+
+		List<BsonDocument> pResults = 
+			_collection.Aggregate<BsonDocument>(pipeline).ToList();
+		return pResults;
+	}
+
+	public void refreshF1()
+	{
+		filterResult1 = filter1(fnameVar, lnameVar, cityVar);
+	}
+}
+
+@code{
+	List<BsonDocument> filterResult2 = filter2();
+
+	public static List<BsonDocument> filter2()
+	{
+		MongoClient _mongoClient = new MongoClient("mongodb://127.0.0.1:27017/");
+		IMongoDatabase _database = _mongoClient.GetDatabase("RealEstate");
+		IMongoCollection<SalesMade> _collection = _database.GetCollection<SalesMade>("SalesMade");
+
+		BsonDocument pipelineStage1 = new BsonDocument{
+			{"$group", new BsonDocument{{ "_id", "$homeID" },{"count", new BsonDocument{{ "$sum", 1 }}}}}
+		};
+
+		BsonDocument pipelineStage2 = new BsonDocument{
+			{"$match", new BsonDocument{{"count", new BsonDocument{{ "$gt", 1 }}}}}
+		};
+
+
+		BsonDocument[] pipeline = new BsonDocument[] {
+		pipelineStage1,
+		pipelineStage2
+	};
+
+		List<BsonDocument> pResults = _collection.Aggregate<BsonDocument>(pipeline).ToList();
+
+		return pResults;
+	}
+
+	public void refreshF2()
+	{
+		filterResult2 = filter2();
+	}
+}
+
+@code{
+	static public string ownerIDVar { get; set; } = "111-22-3333";
+	List<BsonDocument> filterResult3 = filter3(ownerIDVar);
+
+	public static List<BsonDocument> filter3(string ownerID)
+	{
+		MongoClient _mongoClient = new MongoClient("mongodb://127.0.0.1:27017/");
+		IMongoDatabase _database = _mongoClient.GetDatabase("RealEstate");
+		IMongoCollection<SalesMade> _collection = _database.GetCollection<SalesMade>("SalesMade");
+
+		BsonDocument pipelineStage1 = new BsonDocument
+		{{
+			"$match", new BsonDocument{
+				{ "ownerID", ownerID }
+			}
+		}};
+
+		BsonDocument pipelineStage2 = new BsonDocument
+		{{
+			"$sort", new BsonDocument{
+				{ "salePrice", -1 }
+			}
+		}};
+
+		BsonDocument pipelineStage3 = new BsonDocument{
+		{ "$limit", 1 }};
+
+		BsonDocument[] pipeline = new BsonDocument[] {
+			pipelineStage1,
+			pipelineStage2,
+			pipelineStage3
+	};
+
+		List<BsonDocument> pResults = _collection.Aggregate<BsonDocument>(pipeline).ToList();
+
+		return pResults;
+	}
+
+	public void refreshF3()
+	{
+		filterResult3 = filter3(ownerIDVar);
+	}
+}
+
+@code{
+	static public string manufacturerVar { get; set; } = "LG";
+	List<BsonDocument> filterResult4 = filter4("LG");
+
+	public static List<BsonDocument> filter4(string manufacturer)
+	{
+		MongoClient _mongoClient = new MongoClient("mongodb://127.0.0.1:27017/");
+		IMongoDatabase _database = _mongoClient.GetDatabase("RealEstate");
+		IMongoCollection<Home> _collection = _database.GetCollection<Home>("Home");
+
+		BsonDocument pipelineStage1 = new BsonDocument
+		{{
+			"$lookup", new BsonDocument{
+				{ "from", "AppliancesOwned" },
+				{ "localField", "homeID" },
+				{ "foreignField", "homeID" },
+				{ "as", "appliances" },
+			}
+		}};
+		BsonDocument pipelineStage2 = new BsonDocument{
+		{ "$unwind", "$appliances" }};
+
+		BsonDocument pipelineStage3 = new BsonDocument
+		{{
+			"$lookup", new BsonDocument{
+				{ "from", "Appliances" },
+				{ "localField", "appliances.modelNameNum" },
+				{ "foreignField", "modelNameNum" },
+				{ "as", "applianceDetails" },
+			}
+		}};
+
+		BsonDocument pipelineStage4 = new BsonDocument
+		{{
+			"$match", new BsonDocument{
+				{ "applianceDetails.manufacturer", manufacturer }
+			}
+		}};
+
+		BsonDocument[] pipeline = new BsonDocument[] {
+			pipelineStage1,
+			pipelineStage2,
+			pipelineStage3,
+			pipelineStage4
+		};
+
+		List<BsonDocument> pResults = 
+			_collection.Aggregate<BsonDocument>(pipeline).ToList();
+
+		return pResults;
+	}
+	
+	public void refreshF4()
+	{
+		filterResult4 = filter4(manufacturerVar);
+
+	}
+}
+
+@code{
+	public string tableBoolVal { get; set; } = "True";
+	static public bool isOwnerVar { get; set; } = true;
+	List<BsonDocument> filterResult5 = filter5(true);
+
+	public static List<BsonDocument> filter5(bool isOwner)
+	{
+		MongoClient _mongoClient = new MongoClient("mongodb://127.0.0.1:27017/");
+		IMongoDatabase _database = _mongoClient.GetDatabase("RealEstate");
+		IMongoCollection<HomeOwner> _collection = _database.GetCollection<HomeOwner>("HomeOwner");
+
+		BsonDocument pipelineStage1 = new BsonDocument
+		{{
+			"$match", new BsonDocument{
+				{ "isCurrentOwner", isOwner }
+			}
+		}};
+
+		BsonDocument pipelineStage2 = new BsonDocument
+		{{
+			"$lookup", new BsonDocument{
+				{ "from", "Home" },
+				{ "localField", "homeID" },
+				{ "foreignField", "homeID" },
+				{ "as", "ownedHomes" },
+			}
+		}};
+
+		BsonDocument[] pipeline = new BsonDocument[] {
+			pipelineStage1,
+			pipelineStage2
+	};
+
+		List<BsonDocument> pResults = _collection.Aggregate<BsonDocument>(pipeline).ToList();
+		return pResults;
+	}
+
+	public void refreshF5()
+	{
+		if(tableBoolVal == "True")
+		{
+			isOwnerVar = true;
+		}
+		else
+		{
+			isOwnerVar = false;
+		}
+		filterResult5 = filter5(isOwnerVar);
+	}
+}
+
+@code{
+	static public int e_idVar { get; set; } = 0;
+	List<BsonDocument> filterResult6 = filter6(1011);
+
+	public static List<BsonDocument> filter6(int e_id)
+	{
+		MongoClient _mongoClient = new MongoClient("mongodb://127.0.0.1:27017/");
+		IMongoDatabase _database = _mongoClient.GetDatabase("RealEstate");
+		IMongoCollection<SalesMade> _collection = _database.GetCollection<SalesMade>("SalesMade");
+		
+		BsonDocument pipelineStage1 = new BsonDocument
+		{
+			{
+				"$match", new BsonDocument
+				{
+					{ "employeeID", e_id }
+				}
+			}
+		};
+
+		//		BsonDocument pipelineStage2 = new BsonDocument
+		//{
+		//	{
+		//		"$group", new BsonDocument
+		//		{
+		//			{ "_id", null },
+		//			{
+		//				"totalCommission", new BsonDocument
+		//				{
+		//					{
+		//						"$sum", new BsonDocument
+		//						{
+		//							{
+		//								"$multiply", new BsonArray
+		//								{
+		//									"$salePrice", 4
+		//								}
+		//							}
+		//						}
+		//					}
+		//				}
+		//			}
+		//		}
+		//	}
+		//};
+
+		BsonDocument[] pipeline = new BsonDocument[] {
+			pipelineStage1
+			//pipelineStage2
+		};
+
+		List<BsonDocument> pResults = _collection.Aggregate<BsonDocument>(pipeline).ToList();
+
+		return pResults;
+	}
+
+	public void refreshF6()
+	{
+		filterResult6 = filter6(e_idVar);
+	}
+}
+
+@code{
+	List<BsonDocument> filterResult7 = filter7();
+
+	public static List<BsonDocument> filter7()
+	{
+		MongoClient _mongoClient = new MongoClient("mongodb://127.0.0.1:27017/");
+		IMongoDatabase _database = _mongoClient.GetDatabase("RealEstate");
+		IMongoCollection<HomeOwner> _collection = _database.GetCollection<HomeOwner>("HomeOwner");
+
+		BsonDocument pipelineStage1 = new BsonDocument
+		{{
+			"$lookup", new BsonDocument{
+				{ "from", "Home" },
+				{ "localField", "homeID" },
+				{ "foreignField", "homeID" },
+				{ "as", "ownedHomes" },
+			}
+		}};
+
+		BsonDocument pipelineStage2 = new BsonDocument{
+		{
+			"$match", new BsonDocument{
+				{
+					"ownedHomes.homeType", new BsonDocument{
+						{ "$in", new BsonArray { "apartment", "mansion" }
+						}
+					}
+				}
+			}
+		}
+		};
+
+
+		BsonDocument[] pipeline = new BsonDocument[] {
+			pipelineStage1,
+			pipelineStage2
+		};
+
+		List<BsonDocument> pResults = _collection.Aggregate<BsonDocument>(pipeline).ToList();
+
+		return pResults;
+	} 
+
+	public void refreshF7()
+	{
+		filterResult7 = filter7();
+	}
+}
+
+@code{
+	static public string city_8_Var { get; set; } = "Rochester";
+	static public int priceVar { get; set; } = 1000000000;
+	List<BsonDocument> filterResult8 = filter8(city_8_Var, priceVar);
+
+	public static List<BsonDocument> filter8(string city, int price)
+	{
+		MongoClient _mongoClient = new MongoClient("mongodb://127.0.0.1:27017/");
+		IMongoDatabase _database = _mongoClient.GetDatabase("RealEstate");
+		IMongoCollection<SalesMade> _collection = _database.GetCollection<SalesMade>("SalesMade");
+
+		BsonDocument pipelineStage1 = new BsonDocument
+		{{
+			"$lookup", new BsonDocument{
+				{ "from", "Home" },
+				{ "localField", "homeID" },
+				{ "foreignField", "homeID" },
+				{ "as", "soldHomes" },
+			}
+		}};
+
+		BsonDocument pipelineStage2 = new BsonDocument{
+		{ "$unwind", "$soldHomes" }};
+
+		BsonDocument pipelineStage3 = new BsonDocument
+		{{
+			"$lookup", new BsonDocument{
+				{ "from", "Location" },
+				{ "localField", "soldHomes.homeID" },
+				{ "foreignField", "homeID" },
+				{ "as", "homeLocation" },
+			}
+		}};
+
+		BsonDocument pipelineStage4 = new BsonDocument{
+		{
+			"$match", new BsonDocument{
+				{ "homeLocation.cityName", city },
+				{
+					"salePrice", new BsonDocument{
+						{ "$lt", price }
+					}
+				}
+			}
+		}
+		};
+
+		BsonDocument pipelineStage5 = new BsonDocument
+		{{
+			"$project", new BsonDocument{
+				{ "soldHomes", 1 },
+				{ "_id", 0 }
+			}
+		}};
+
+		BsonDocument[] pipeline = new BsonDocument[] {
+			pipelineStage1,
+			pipelineStage2,
+			pipelineStage3,
+			pipelineStage4,
+			pipelineStage5
+		};
+
+		List<BsonDocument> pResults = _collection.Aggregate<BsonDocument>(pipeline).ToList();
+
+		return pResults;
+	}
+
+	public void refreshF8()
+	{
+		filterResult8 = filter8(city_8_Var, priceVar);
+	}
+}
+
+@code{
+	static public string locationVar { get; set; } = "Ann Arbor";
+	static public bool isSoldVar { get; set; } = false;
+	static public string isSoldTableVar { get; set; } = "False";
+	static public int bedRoomsVar { get; set; } = 3;
+	static public int bathRoomsVar { get; set; } = 3;
+	List<BsonDocument> filterResult10 = filter10(locationVar, isSoldVar, bedRoomsVar, bathRoomsVar);
+
+	public static List<BsonDocument> filter10(string location, bool isSold, int bedRooms, int bathrooms)
+	{
+		MongoClient _mongoClient = new MongoClient("mongodb://127.0.0.1:27017/");
+		IMongoDatabase _database = _mongoClient.GetDatabase("RealEstate");
+		IMongoCollection<Listing> _collection = _database.GetCollection<Listing>("Listing");
+
+		BsonDocument pipelineStage1 = new BsonDocument
+		{{
+			"$lookup", new BsonDocument{
+				{ "from", "Home" },
+				{ "localField", "homeID" },
+				{ "foreignField", "homeID" },
+				{ "as", "home" },
+			}
+		}};
+
+		BsonDocument pipelineStage2 = new BsonDocument{
+		{ "$unwind", "$home" }
+		};
+
+		BsonDocument pipelineStage3 = new BsonDocument
+		{{
+			"$lookup", new BsonDocument{
+				{ "from", "Location" },
+				{ "localField", "homeID" },
+				{ "foreignField", "homeID" },
+				{ "as", "location" },
+			}
+		}};
+
+		BsonDocument pipelineStage4 = new BsonDocument{
+		{ "$unwind", "$location" }
+		};
+
+		BsonDocument pipelineStage5 = new BsonDocument
+		{{
+			"$match", new BsonDocument{
+				{ "location.cityName", location },
+				{ "isSold", isSold }
+			}
+		}};
+
+		BsonDocument pipelineStage6 = new BsonDocument
+		{{
+			"$match", new BsonDocument{
+				{ "home.bedRooms", bedRooms },
+				{ "home.bathRooms", bathrooms }
+			}
+		}};
+
+		BsonDocument pipelineStage7 = new BsonDocument
+		{{
+			"$project", new BsonDocument{
+				{ "homeID", "$home.homeID" }
+			}
+		}};
+
+		BsonDocument[] pipeline = new BsonDocument[] {
+			pipelineStage1,
+			pipelineStage2,
+			pipelineStage3,
+			pipelineStage4,
+			pipelineStage5,
+			pipelineStage6,
+			pipelineStage7
+		};
+
+		List<BsonDocument> pResults = _collection.Aggregate<BsonDocument>(pipeline).ToList();
+
+		return pResults;
+	}
+
+	public void refreshF10()
+	{
+		if (isSoldTableVar == "True")
+		{
+			isSoldVar = true;
+		}
+		else
+		{
+			isSoldVar = false;
+		}
+		filterResult10 = filter10(locationVar, isSoldVar, bedRoomsVar, bathRoomsVar);
+	}
+
+}

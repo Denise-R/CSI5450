@@ -1,0 +1,413 @@
+﻿@page "/AddHome"
+@using Radzen.Blazor
+@using BalzorMongoDB.Data
+@inject BalzorMongoDB.IService.IAppliancesOwned appliancesOwnedService
+@inject BalzorMongoDB.IService.IHomeOwner homeOwnerService
+@inject BalzorMongoDB.IService.IHome homeService
+@inject BalzorMongoDB.IService.ILocation locationService
+<h3>Add a Home</h3>
+
+<div class="col-md-12">
+	<div class="h-100 p-3 bg-white border rounded"
+		<div class="row">
+			<div class="col-md-2">
+				<div class="md-3">
+					<label class="form-label fw-bold">Home ID</label>
+					<input type="number" min="0" class="form-control" @bind="home.homeID" style="width:100%;"  />
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="md-3">
+					<label class="form-label fw-bold">Floor Space</label>
+					<input type="number" min="0" class="form-control" @bind="home.floorSpace" style="width:100%;"  />
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="md-3">
+					<label class="form-label fw-bold">Floors</label>
+					<input type="number" min="0" class="form-control" @bind="home.floors" style="width:100%;" />
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="md-3">
+					<label class="form-label fw-bold">Bed Rooms</label>
+					<input type="number" min="0" class="form-control" @bind="home.bedRooms" style="width:100%;"  />
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="md-3">
+					<label class="form-label fw-bold">Bath Rooms</label>
+					<input type="number" min="0" class="form-control" @bind="home.bathRooms" style="width:100%;"  />
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="md-3">
+					<label class="form-label fw-bold">Land Size</label>
+					<input type="number" min="0" class="form-control" @bind="home.landSize" style="width:100%;"  />
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="md-3">
+					<label class="form-label fw-bold">Year Constructed</label>
+					<input type="number" min="0" class="form-control" @bind="home.yearConstructed" style="width:100%;"  />
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="md-3">
+					<label class="form-label fw-bold">Home Type</label>
+					<input type="text" class="form-control" @bind="home.homeType" style="width:100%;"  />
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="md-3">
+					<label class="form-label fw-bold">Extra Features</label>
+					<input type="text" class="form-control" @bind="home.extraFeatures" style="width:100%;"  />
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="md-3">
+					<label class="form-label fw-bold">Unit No.</label>
+					<input type="number"  min="0.01" class="form-control" @bind="home.unitNum" style="width:100%;"  />
+				</div>
+			</div>
+		</div>
+		<br/>
+		<br/>
+
+		<div class="row">
+			<div class="col-md-2">
+				<div class="md-3">
+					<label class="form-label fw-bold">City Name</label>
+					<input type="text" class="form-control" @bind="location.cityName" style="width:100%;"  />
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="md-3">
+					<label class="form-label fw-bold">Street</label>
+					<input type="text" class="form-control" @bind="location.street" style="width:100%;"  />
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="md-3">
+					<label class="form-label fw-bold">Zip Code</label>
+					<input type="number"  min="0.01" class="form-control" @bind="location.zipCode" style="width:100%;" />
+				</div>
+			</div>
+		</div>	
+		<br/>
+		<br/>
+
+		<div class="row">
+			<div class="col-md-2">
+				<div class="md-3">
+					<label class="form-label fw-bold">Home Owner SSN</label>
+					<input type="text" class="form-control" @bind="homeOwner.SSN" style="width:100%;" />
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="md-3">
+					<label class="form-label fw-bold">First Name</label>
+					<input type="text" class="form-control" @bind="homeOwner.firstName" style="width:100%;"  />
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="md-3">
+					<label class="form-label fw-bold">Last Name</label>
+					<input type="text" class="form-control" @bind="homeOwner.lastName" style="width:100%;"  />
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="md-3">
+					<label class="form-label fw-bold">Dependents</label>
+					<input type="number" min="0" class="form-control" @bind="homeOwner.dependents" style="width:100%;" />
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="md-3">
+					<label class="form-label fw-bold">Income/year</label>
+					<input type="number" min="0" class="form-control" @bind="homeOwner.income" style="width:100%;"  />
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="md-3">
+					<label class="form-label fw-bold">Age</label>
+					<input type="number" min="0" class="form-control" @bind="homeOwner.age" style="width:100%;"  />
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="md-3">
+					<label class="form-label fw-bold">Profession</label>
+					<input type="text" class="form-control" @bind="homeOwner.profession" style="width:100%;"  />
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-md-2">
+				<div class="md-2">
+					<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
+					<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> Save())">Save</button>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="md-2">
+					<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
+					<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> Reset())">Reset</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br />
+<br />
+<br/>
+
+<div class="col-md-2">
+	<div class="mb-3">
+		<label class="form-check-label fw-bold">Select Table View</label>
+		<select class="form-select" @bind="tableViewed">
+			<option value="Appliances Owned">Appliances Owned</option>
+			<option value="Homes">Homes</option>
+			<option value="Home Owners">Home Owners</option>
+			<option value="Locations">Locations</option>
+		</select>
+	</div>
+</div>
+<br />
+
+@if (tableViewed == "Homes")
+{
+	<h5>Home Table</h5>
+
+	<RadzenDataGrid Data="@Homes" TItem="Home" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+				AllowMultiColumnSorting="true" AllowFiltering="true">
+		<Columns>
+			<RadzenDataGridColumn TItem="Home" Property="homeID" Title="Home ID" />
+			<RadzenDataGridColumn TItem="Home" Property="floorSpace" Title="FloorSpace" />
+			<RadzenDataGridColumn TItem="Home" Property="floors" Title="Floors" />
+			<RadzenDataGridColumn TItem="Home" Property="bedRooms" Title="Bedrooms" />
+			<RadzenDataGridColumn TItem="Home" Property="bathRooms" Title="Bathrooms" />
+			<RadzenDataGridColumn TItem="Home" Property="landSize" Title="LandSize" />
+			<RadzenDataGridColumn TItem="Home" Property="yearConstructed" Title="Year Constructed" />
+			<RadzenDataGridColumn TItem="Home" Property="homeType" Title="Home Type" />
+			<RadzenDataGridColumn TItem="Home" Property="extraFeatures" Title="Extra Features" />
+			<RadzenDataGridColumn TItem="Home" Property="unitNum" Title="Unit No." />
+		</Columns>
+	</RadzenDataGrid>
+
+}
+else if (tableViewed == "Home Owners")
+{
+	<h5>Home Owner Table</h5>
+
+	<RadzenDataGrid Data="@HomeOwners" TItem="HomeOwner" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+				AllowMultiColumnSorting="true" AllowFiltering="true">
+		<Columns>
+			<RadzenDataGridColumn TItem="HomeOwner" Property="SSN" Title="SSN" />
+			<RadzenDataGridColumn TItem="HomeOwner" Property="homeID" Title="Home ID" />
+			<RadzenDataGridColumn TItem="HomeOwner" Property="firstName" Title="First Name" />
+			<RadzenDataGridColumn TItem="HomeOwner" Property="lastName" Title="Last Name" />
+			<RadzenDataGridColumn TItem="HomeOwner" Property="dependents" Title="Dependents" />
+			<RadzenDataGridColumn TItem="HomeOwner" Property="income" Title="Income" />
+			<RadzenDataGridColumn TItem="HomeOwner" Property="age" Title="Age" />
+			<RadzenDataGridColumn TItem="HomeOwner" Property="profession" Title="Proffession" />
+			<RadzenDataGridColumn TItem="HomeOwner" Property="isCurrentOwner" Title="Current Owner" />
+		</Columns>
+	</RadzenDataGrid>
+}
+else if (tableViewed == "Locations")
+{
+	<h5>Location Table</h5>
+
+	<RadzenDataGrid Data="@Locations" TItem="Location" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+				AllowMultiColumnSorting="true" AllowFiltering="true">
+		<Columns>
+			<RadzenDataGridColumn TItem="Location" Property="homeID" Title="Home ID" />
+			<RadzenDataGridColumn TItem="Location" Property="cityName" Title="City Name" />
+			<RadzenDataGridColumn TItem="Location" Property="street" Title="Street" />
+			<RadzenDataGridColumn TItem="Location" Property="zipCode" Title="Zip Code" />
+			<RadzenDataGridColumn TItem="Location" Property="unitNum" Title="Unit No." />
+		</Columns>
+	</RadzenDataGrid>
+}
+else if (tableViewed == "Appliances Owned")
+{
+	<h5>Appliances Owned Table</h5>
+
+	<RadzenDataGrid Data="@AppliancesOwned" TItem="AppliancesOwned" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
+				AllowMultiColumnSorting="true" AllowFiltering="true">
+		<Columns>
+			<RadzenDataGridColumn TItem="AppliancesOwned" Property="modelNameNum" Title="Model Name/No." />
+			<RadzenDataGridColumn TItem="AppliancesOwned" Property="manufacturer" Title="Manufacturer" />
+			<RadzenDataGridColumn TItem="AppliancesOwned" Property="applianceName" Title="Appliance Name" />
+			<RadzenDataGridColumn TItem="AppliancesOwned" Property="homeID" Title="Home ID" />
+			<RadzenDataGridColumn TItem="AppliancesOwned" Property="quantity" Title="Quantity" />
+			<RadzenDataGridColumn TItem="AppliancesOwned" Property="retailPrice" Title="Retail Price" />
+		</Columns>
+
+	</RadzenDataGrid>
+}
+
+
+
+
+
+
+@code {
+	public string tableViewed { get; set; } = "Homes";
+	public int homeIDVal { get; set; } = 0;
+	public int unitNumVal { get; set; } = 0;
+
+	private void Save()
+	{
+		homeIDVal = home.homeID;
+		location.homeID = homeIDVal;
+		homeOwner.homeID = homeIDVal;
+		homeOwner.isCurrentOwner = true;
+		unitNumVal = home.unitNum;
+		location.unitNum = unitNumVal;
+		SaveAppliancesOwned();
+		SaveHome();
+		SaveHomeOwner();
+		SaveLocation();
+	}
+
+	private void Reset()
+	{
+		ResetAppliancesOwned();
+		ResetHome();
+		ResetHomeOwner();
+		ResetLocation();
+	}
+
+	@code {
+	protected override async Task OnInitializedAsync()
+	{
+		GetAllAppliancesOwned();
+		GetHomes();
+		GetHomeOwners();
+		GetLocations();
+	}
+}
+}
+
+@code
+{
+	AppliancesOwned appliancesOwned = new AppliancesOwned();
+	List<AppliancesOwned> AppliancesOwned = new List<AppliancesOwned>();
+
+	private void GetAllAppliancesOwned()
+	{
+		AppliancesOwned = appliancesOwnedService.GetAppliancesOwned();
+	}
+
+	private void SaveAppliancesOwned()
+	{
+		appliancesOwnedService.SaveOrUpdate(appliancesOwned);
+		ResetAppliancesOwned();
+		GetAllAppliancesOwned();
+	}
+	private void ResetAppliancesOwned()
+	{
+		appliancesOwned = new AppliancesOwned();
+	}
+	private void EditAppliancesOwned(string appliancesOwnedId)
+	{
+		appliancesOwned = appliancesOwnedService.GetApplianceOwned(appliancesOwnedId);
+	}
+	private void DeleteAppliancesOwned(string appliancesOwnedId)
+	{
+		appliancesOwnedService.Delete(appliancesOwnedId);
+		GetAllAppliancesOwned();
+	}
+}
+
+@code {
+	Home home = new Home();
+	List<Home> Homes = new List<Home>();
+	
+	private void GetHomes()
+	{
+		Homes = homeService.GetHomes();
+	}
+
+	private void SaveHome()
+	{
+		homeService.SaveOrUpdate(home);
+		ResetHome();
+		GetHomes();
+	}
+	private void ResetHome()
+	{
+		home = new Home();
+	}
+	private void EditHome(string homeId)
+	{
+		home = homeService.GetHome(homeId);
+	}
+	private void DeleteHome(string homeId)
+	{
+		homeService.Delete(homeId);
+		GetHomes();
+	}
+}
+@code {
+	Location location = new Location();
+	List<Location> Locations = new List<Location>();
+
+	private void GetLocations()
+	{
+		Locations = locationService.GetLocations();
+	}
+
+	private void SaveLocation()
+	{
+		locationService.SaveOrUpdate(location);
+		ResetLocation();
+		GetLocations();
+	}
+	private void ResetLocation()
+	{
+		location = new Location();
+	}
+	private void EditLocation(string locationId)
+	{
+		location = locationService.GetLocation(locationId);
+	}
+	private void DeleteLocation(string locationId)
+	{
+		locationService.Delete(locationId);
+		GetLocations();
+	}
+}
+
+@code {
+	HomeOwner homeOwner = new HomeOwner();
+	List<HomeOwner> HomeOwners = new List<HomeOwner>();
+
+	private void GetHomeOwners()
+	{
+		HomeOwners = homeOwnerService.GetHomeOwners();
+	}
+
+	private void SaveHomeOwner()
+	{
+		homeOwnerService.SaveOrUpdate(homeOwner);
+		ResetHomeOwner();
+		GetHomeOwners();
+	}
+	private void ResetHomeOwner()
+	{
+		homeOwner = new HomeOwner();
+	}
+	private void EditHomeOwner(string homeOwnerId)
+	{
+		homeOwner = homeOwnerService.GetHomeOwner(homeOwnerId);
+	}
+	private void DeleteHomeOwner(string homeOwnerId)
+	{
+		homeOwnerService.Delete(homeOwnerId);
+		GetHomeOwners();
+	}
+}

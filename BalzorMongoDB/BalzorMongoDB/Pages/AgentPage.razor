@@ -13,7 +13,7 @@
 			<div class="col-md-2">
 				<div class="md-3">
 					<label class="form-label fw-bold">Agent ID</label>
-					<input type="number" min="0" class="form-control" @bind="agent.agentID" style="width:100%;" placeholder="1001" />
+					<input type="number" min="0" class="form-control" @bind="agent.agentID" style="width:100%;" placeholder="104" />
 				</div>
 			</div>
 			<div class="col-md-2">
@@ -30,11 +30,17 @@
 			</div>
 			<div class="col-md-2">
 				<div class="md-3">
+					<label class="form-label fw-bold">Employee ID</label>
+					<input type="number"  min="1011" class="form-control" @bind="employee.employeeID" style="width:100%;" placeholder="1011" />
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="md-3">
 					<label class="form-label fw-bold">Commision Rate</label>
 					<input type="number"  min="0.01" class="form-control" @bind="employee.commissionRate" style="width:100%;" placeholder="0.05" />
 				</div>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<div class="md-3">
 					<label class="form-label fw-bold" >Company Name</label>
 					<select name="one" class="form-select" aria-label="Site" @bind="employee.companyName" placeholder="Coastal Living Realty">
@@ -131,10 +137,13 @@ else if (tableViewed == "Employee")
 
 @code {
 	public string tableViewed { get; set; } = "Agent";
-
+	public int agentIDVal { get; set; } = 0;
 	private void Save()
 	{
+		agentIDVal = agent.agentID;
+		employee.agentID = agentIDVal;
 		SaveAgent();
+		
 		SaveEmployee();
 	}
 

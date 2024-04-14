@@ -12,37 +12,21 @@ namespace BalzorMongoDB.Service
 		public HomeService()
 		{
 			_mongoClient = new MongoClient("mongodb://127.0.0.1:27017/");
-			_database = _mongoClient.GetDatabase("RealEstate"); // fix me
+			_database = _mongoClient.GetDatabase("RealEstate");
 			_homeTable = _database.GetCollection<Home>("Home");
 		}
 		public string Delete(string homeID)
-		{
-			_homeTable.DeleteOne(x => x._id == homeID);
-			return "Deleted";
-		}
-
+		{_homeTable.DeleteOne(x => x._id == homeID);
+			return "Deleted";}
 		public Home GetHome(string homeID)
-		{
-			return _homeTable.Find(x => x._id == homeID).FirstOrDefault();
-		}
-
+		{return _homeTable.Find(x => x._id == homeID).FirstOrDefault();}
 		public List<Home> GetHomes()
-		{
-			return _homeTable.Find(FilterDefinition<Home>.Empty).ToList();
-		}
-
+		{return _homeTable.Find(FilterDefinition<Home>.Empty).ToList();}
 		public void SaveOrUpdate(Home home)
-		{
-			var homeObj = _homeTable.Find(x => x._id == home._id).FirstOrDefault();
+		{var homeObj = _homeTable.Find(x => x._id == home._id).FirstOrDefault();
 			if (homeObj == null)
-			{
-				_homeTable.InsertOne(home);
-			}
-			else
-			{
-				_homeTable.ReplaceOne(x => x._id == home._id, home);
-			}
+			{_homeTable.InsertOne(home);}
+			else{_homeTable.ReplaceOne(x => x._id == home._id, home);}
 		}
-	}
-	
+	}	
 }

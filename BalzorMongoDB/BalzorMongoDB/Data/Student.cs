@@ -14,5 +14,13 @@ namespace BalzorMongoDB.Data
         public string Name { get; set; } = "";
         public string Roll { get; set; } = "";
         public int Age { get; set; } = 0;
+
+        [BsonIgnore]
+        public int AgeFilterType { get; set; } = 0;
+		[BsonIgnore]
+		public int FromAge { get; set; } = 0;
+		[BsonIgnore]
+		public int ToAge { get; set; } = 0;
     }
+
 }

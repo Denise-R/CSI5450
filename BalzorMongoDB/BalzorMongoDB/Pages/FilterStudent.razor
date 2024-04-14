@@ -1,0 +1,182 @@
+﻿@page "/Filter"
+@using BalzorMongoDB.Data
+
+@inject BalzorMongoDB.IService.IStudentService studentService
+
+
+<select @onchange=@LoadStudents style="height:40px;">
+	<option value="5">5</option>
+	<option value="10" selected>10</option>
+	<option value="15">15</option>
+	<option value="20">20</option>
+</select>
+
+<button class="btn btn-primary" @onclick="@(e=> Save())">Bulk Save 100 Students</button>
+<br/>
+
+<div class="row">
+	<div class="col-md-12">
+		<h2 style="color:#c00;float:right;">Total Students : @CountStudents</h2>
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr style="text-align: center;">
+					<th>Student ID</th>
+					<th>Name</th>
+					<th>Roll</th>
+					<th>Age</th>
+				</tr>
+				<tr>
+					<th></th>
+					<th>
+						<input type="text" @bind="Student.Name" @onfocusout="@(() => LoadList(StartPageNumber))" />
+					</th>
+					<th>
+						<input type="text" @bind="Student.Roll" @onfocusout="@(() => LoadList(StartPageNumber))" />
+					</th>
+					<th>
+						<select @onchange=@LoadStudentAgeFilter style="height:30px;">
+							<option value="0">None</option>
+							<option value="1">Between</option>
+							<option value="2">Less Than</option>
+							<option value="3">Greater</option>
+							<option value="3">Equal</option>
+						</select>
+						<input type="text" @bind="Student.FromAge" @onfocusout="@(() => LoadList(StartPageNumber))" />
+						@if (IsShowToAge)
+						{
+						<input type="text" @bind="Student.ToAge" @onfocusout="@(() => LoadList(StartPageNumber))" />
+							
+						}
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				@if (Students.Count() > 0)
+				{
+					@foreach (var stu in Students)
+					{
+						<tr>
+							<td>@stu.Id</td>
+							<td>@stu.Name</td>
+							<td>@stu.Roll</td>
+							<td>@stu.Age</td>
+						</tr>
+					}
+				}
+			</tbody>
+		</table>
+		<nav aria-label="Page navigation example" style="float:right">
+			<ul class="pagination">
+				@if (IsShow)
+				{
+					<li class="page-item" @onclick="PreviousPage"><a class="page-link" href="#">Previous</a></li>
+				}
+				@for (int p = StartPageNumber; p <= EndPageNumber; p++)
+				{
+					int page = p;
+					<li class="page-item" @onclick="@(() => Goto(page))"><a class="page-link" href="#">@p</a></li>
+				}
+				@if (IsShow)
+				{
+					<li class="page-item" @onclick="NextPage"><a class="page-link" href="#">Next</a></li>
+				}
+			</ul>
+		</nav>
+	</div>
+</div>
+
+
+
+@code{
+	Student Student = new Student();
+	List<Student> Students = new List<Student>();
+
+	int CountStudents = 0;
+	int CountDisplayStudent = 10;
+	int MaxPageNumber = 0;
+	int StartPageNumber = 1;
+	int EndPageNumber = 3;
+	bool IsShow = true;
+	bool IsShowToAge = false;
+
+	protected override async Task OnInitializedAsync()
+	{
+		GeneratePagination(Student);
+		GetStudents();
+	}
+
+	private void GetStudents()
+	{
+		Students = studentService.GetStudents(1, CountDisplayStudent, Student);
+	}
+	private void GeneratePagination(Student student)
+	{
+		CountStudents = studentService.GetStudentCount(student);
+		MaxPageNumber = (int)Math.Ceiling(Convert.ToDecimal(CountStudents) / Convert.ToDecimal(CountDisplayStudent));
+		ApplyHideShow();
+	}
+	private void ApplyHideShow()
+	{
+		if (MaxPageNumber <= 3) IsShow = false;
+		else IsShow = true;
+	}
+	private void Save()//bulk 100 student save
+	{
+		studentService.Save(Student);
+		GetStudents();
+	}
+	private void PreviousPage()
+	{
+		var firstPage = StartPageNumber - 3;
+		if (firstPage <= 0) firstPage = 1;
+		StartPageNumber = firstPage;
+		EndPageNumber = StartPageNumber + 2;
+		Goto(StartPageNumber);
+	}
+	private void NextPage()
+	{
+		StartPageNumber = EndPageNumber + 1;
+		var lastPage = EndPageNumber + 3;
+		if (lastPage > MaxPageNumber) lastPage = MaxPageNumber;
+		EndPageNumber = lastPage;
+		Goto(StartPageNumber);
+	}
+	private void Goto(int pageNumber)
+	{
+		Students = studentService.GetStudents(pageNumber, CountDisplayStudent, Student);
+	}
+
+	private void LoadStudents(ChangeEventArgs e)
+	{
+		CountDisplayStudent = Convert.ToInt32(e.Value);
+		MaxPageNumber = (int)Math.Ceiling(Convert.ToDecimal(CountStudents) / Convert.ToDecimal(CountDisplayStudent));
+		Students = studentService.GetStudents(1, CountDisplayStudent, Student);
+
+		ResetPageNumber();
+		ApplyHideShow();
+	}
+	private void ResetPageNumber()
+	{
+		StartPageNumber = 1;
+		EndPageNumber = MaxPageNumber <= 3 ? MaxPageNumber : 3;
+	}
+	private void LoadStudentAgeFilter(ChangeEventArgs e)
+	{
+		Student.AgeFilterType = Convert.ToInt32(e.Value);
+		if (Student.AgeFilterType != 1) IsShowToAge = false;
+		else IsShowToAge = true;
+		if(Student.AgeFilterType == 0) //Age filter type = none
+		{
+			Student.FromAge = 0;
+			Student.ToAge = 0;
+			LoadList(StartPageNumber);
+		}
+	}
+	private void LoadList(int pageNumber)
+	{
+		GeneratePagination(Student);
+		ResetPageNumber();
+		Goto(StartPageNumber);
+	}
+
+}

@@ -10,7 +10,8 @@ namespace BalzorMongoDB.Data
 	public class Home
 	{
 		[BsonRepresentation(BsonType.ObjectId)]
-		public string _id { get; set; } = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+		public string _id { get; set; } = 
+			MongoDB.Bson.ObjectId.GenerateNewId().ToString();
 		public int homeID { get; set; } = 0;
 		public int floorSpace { get; set; } = 0;
 		public int floors { get; set; } = 0;
@@ -23,3 +24,5 @@ namespace BalzorMongoDB.Data
 		public int unitNum { get; set; } = 0;
 	}
 }
+
+

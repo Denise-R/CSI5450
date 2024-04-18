@@ -3,6 +3,7 @@
 
 @inject BalzorMongoDB.IService.IStudentService studentService
 
+@*CSS to get image*@
 <style>
 	img {
 		display: block;
@@ -11,11 +12,12 @@
 	}
 </style>
 
-
+@*header title*@
 <h1 style="font-family:verdana;color:red; text-align:center; font-size:300%;"><b>Home Finder</b></h1>
 <br />
 <br />
 
+@*displaying image*@
 <div>
 	<img src="/Images/home.jpg" asp-append-version="true" width="700px" class="center" />
 </div>
@@ -23,123 +25,8 @@
 <br/>
 <br/>
 
-
+@*group member's *@
 <h4 style="font-family:verdana;color:black; text-align:center; font-size:120%;">
 	Created by: Brandon Hermez, Jood Otey, Absalat Getachew, Denise Rauschendorfer, Elira Shaska
 </h4>
 
-
-
-
-@*
-<div class="row">
-	<div class="col-md-4">
-		<div class="row">
-			<div class="col-md-4">
-				<label>Name: </label>
-			</div>
-			<div class="col-md-8">
-				<input @bind="Student.Name" style="width:100%;" placeholder="Student.Name"/>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<label>Roll: </label>
-			</div>
-			<div class="col-md-8">
-				<input @bind="Student.Roll" style="width:100%;" placeholder="Student.Roll" />
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<label>Age: </label>
-			</div>
-			<div class="col-md-8">
-				<input @bind="Student.Age" style="width:100%;" placeholder="Student.Age" />
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4"></div>
-			<div class="col-md-8">
-				<button class="btn btn-primary" @onclick="@(e=> Save())">Save</button>
-				<button class="btn btn-primary" @onclick="@(e=> Reset())" style="float:right;">Reset</button>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-8">
-		<table class="table table-striped table-bordered">
-			<thead>
-				<tr>
-					<th>Student ID</th>
-					<th>Name</th>
-					<th>Roll</th>
-					<th>Age</th>
-					<th>Action</th>
-				</tr>
-			</thead>
-			<tbody>
-				@if (Students.Count() > 0)
-				{
-					@foreach (var stu in Students)
-					{
-						<tr>
-							<td>@stu.Id</td>
-							<td>@stu.Name</td>
-							<td>@stu.Roll</td>
-							<td>@stu.Age</td>
-							<td>
-								<button class="btn btn-primary" @onclick="@(e=> Edit(@stu.Id))">Edit</button>
-								<button class="btn btn-primary" @onclick="@(e=> Delete(@stu.Id))">Delete</button>
-							</td>
-						</tr>
-					}
-				}
-			</tbody>
-		</table>
-	</div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-@code{
-	Student Student = new Student();
-	List<Student> Students = new List<Student>();
-	protected override async Task OnInitializedAsync()
-	{
-		GetStudents();
-	}
-
-	private void GetStudents()
-	{
-		Students = studentService.GetStudents();
-	}
-
-	private void Save()
-	{
-		studentService.SaveOrUpdate(Student);
-		Reset();
-		GetStudents();
-	}
-	private void Reset()
-	{
-		Student = new Student();
-	}
-	private void Edit(string studentId)
-	{
-		Student = studentService.GetStudent(studentId);
-	}
-	private void Delete(string studentId)
-	{
-		studentService.Delete(studentId);
-		GetStudents();
-	}
-}*@

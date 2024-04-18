@@ -9,31 +9,37 @@
 
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
     <nav class="flex-column">
+        @*link to home page*@
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                 <span class="oi oi-home" aria-hidden="true"></span> Home
             </NavLink>
         </div>
+        @*link to all tables*@
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="Tables">
                 <span class="oi oi-plus" aria-hidden="true"></span> Tables
             </NavLink>
         </div>
+        @*link to add a new agent*@
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="AddAgent">
                 <span class="oi oi-plus" aria-hidden="true"></span> Add Agent
             </NavLink>
         </div>
+        @*link to add a new home*@
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="AddHome">
                 <span class="oi oi-plus" aria-hidden="true"></span> Add Home
             </NavLink>
         </div>
+        @*link to update listing*@
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="UpdateListing">
                 <span class="oi oi-plus" aria-hidden="true"></span> Update Listings
             </NavLink>
         </div>
+        @*link to filter page*@
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="FilterRE">
                 <span class="oi oi-plus" aria-hidden="true"></span> Filters
@@ -42,6 +48,7 @@
     </nav>
 </div>
 
+@*preventing nav menu collapse*@
 @code {
     private bool collapseNavMenu = true;
 

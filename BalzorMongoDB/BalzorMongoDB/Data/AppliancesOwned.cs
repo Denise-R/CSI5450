@@ -7,10 +7,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+// creating class for AppliancesOwned table 
+
 namespace BalzorMongoDB.Data
 {
 	public class AppliancesOwned
 	{
+		// creating AppliancesOwned instance
+
 		[BsonRepresentation(BsonType.ObjectId)]
 		public string _id { get; set; } = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
 		public int modelNameNum { get; set; } = 0;

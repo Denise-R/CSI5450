@@ -4,14 +4,16 @@
 @inject BalzorMongoDB.IService.IListing listingService
 @inject BalzorMongoDB.IService.IHomeOwner homeOwnerService
 
-
+@*page title*@
 <h3>Update Home Listings</h3>
 <br />
 <br />
 
 <div class="col-md-12">
+	@*hidding table unless one to edit is selected*@
 	<div class="h-100 p-3 bg-white border rounded" hidden ="@isHidden">
 		<div class="row">
+			@*user edits to update table*@
 			<div class="col-md-2">
 				<div class="md-3">
 					<label class="form-label fw-bold">Sold To</label>
@@ -61,12 +63,14 @@
 		<div class="row">
 			<div class="col-md-2">
 				<div class="md-2">
+					@*save updates*@
 					<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
 					<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> Save())">Save</button>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="md-2">
+					@*reset values*@
 					<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
 					<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> Reset())">Reset</button>
 				</div>
@@ -81,7 +85,7 @@
 
 <h5>Listings Table</h5>
 <div class="row">
-	
+	@*displaying listings table*@
 	<div class="col-md-12">
 		<table class="table table-striped table-bordered">
 			<thead>
@@ -111,6 +115,7 @@
 							<td>@i.isSold</td>
 							<td>@i.soldTo</td>
 							<td>
+								@*making editing avalible only for houses that are not sold*@
 								@if(@i.isSold == false)
 								{
 								<button class="btn btn-primary" @onclick="@(e=> EditListing(@i._id))">Edit</button>
@@ -127,6 +132,7 @@
 <br />
 <br />
 <br />
+@*adding home owner table*@
 <h5>Home Owner Table</h5>
 
 <RadzenDataGrid Data="@HomeOwners" TItem="HomeOwner" AllowSorting="true" AllowColumnReorder="true" AllowColumnPicking="true"
@@ -150,6 +156,7 @@
 	public string SSNVal { get; set; } = "";
 	public bool isHidden { get; set; } = true;
 
+	//creating instance of table classes
 	protected override async Task OnInitializedAsync()
 	{
 		GetListings();
@@ -157,18 +164,25 @@
 
 	}
 
+	//updating tables
 	private void Save()
 	{
+		//setting listings home id and homeOwner homeID to the same value
 		homeIDVal = listing.homeID;
 		homeOwner.homeID = homeIDVal; 
+
+		//setting sold to and SSN to the same value
 		SSNVal = listing.soldTo;
 		homeOwner.SSN = SSNVal;
 		homeOwner.isCurrentOwner = true;
 		SaveListing();
 		SaveHomeOwner();
+
+		// hidding editing entries unitl selected again from listings table
 		isHidden = true;
 	}
 
+	//resetting values
 	private void Reset()
 	{
 		ResetHomeOwner();
@@ -179,9 +193,11 @@
 
 
 @code {
+	// creating listings class instance
 	Listing listing = new Listing();
 	List<Listing> Listings = new List<Listing>();
 
+	// getting table values
 	private void GetListings()
 	{
 		Listings = listingService.GetListings();
@@ -189,8 +205,11 @@
 
 	public string checkSoldTo { get; set; } = "";
 	public bool checkIsSold { get; set; } = false;
+
+	// updating listings table
 	private void SaveListing()
 	{
+		// changing isSold value to a bool
 		checkSoldTo = listing.soldTo;
 		if (checkSoldTo != null)
 		{
@@ -204,48 +223,46 @@
 		ResetListing();
 		GetListings();
 	}
+
+	//resetting values
 	private void ResetListing()
 	{
 		listing = new Listing();
 	}
+
+	//allowing single listing entry to be edited in table
 	private void EditListing(string listingId)
 	{
 		listing = listingService.GetListing(listingId);
 		isHidden = false;
 	}
-	private void DeleteListing(string listingId)
-	{
-		listingService.Delete(listingId);
-		GetListings();
-	}
+
 }
 
 @code {
+	// creating instance of home owner class
 	HomeOwner homeOwner = new HomeOwner();
 	List<HomeOwner> HomeOwners = new List<HomeOwner>();
 
+
+	//getting home owner table 
 	private void GetHomeOwners()
 	{
 		HomeOwners = homeOwnerService.GetHomeOwners();
 	}
 
+	//saving updates made from user entries
 	private void SaveHomeOwner()
 	{
 		homeOwnerService.SaveOrUpdate(homeOwner);
 		ResetHomeOwner();
 		GetHomeOwners();
 	}
+
+	//reseting values to original (before update saved)
 	private void ResetHomeOwner()
 	{
 		homeOwner = new HomeOwner();
 	}
-	private void EditHomeOwner(string homeOwnerId)
-	{
-		homeOwner = homeOwnerService.GetHomeOwner(homeOwnerId);
-	}
-	private void DeleteHomeOwner(string homeOwnerId)
-	{
-		homeOwnerService.Delete(homeOwnerId);
-		GetHomeOwners();
-	}
+
 }

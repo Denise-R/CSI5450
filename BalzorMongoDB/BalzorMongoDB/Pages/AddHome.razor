@@ -1,6 +1,7 @@
 ﻿@page "/AddHome"
 @using Radzen.Blazor
 @using BalzorMongoDB.Data
+@*getting functions from files*@
 @inject BalzorMongoDB.IService.IAppliancesOwned appliancesOwnedService
 @inject BalzorMongoDB.IService.IHomeOwner homeOwnerService
 @inject BalzorMongoDB.IService.IHome homeService
@@ -8,8 +9,9 @@
 <h3>Add a Home</h3>
 
 <div class="col-md-12">
-	<div class="h-100 p-3 bg-white border rounded"
+	<div class="h-100 p-3 bg-white border rounded">
 		<div class="row">
+			@*creating text boxes for users to update tables*@
 			<div class="col-md-2">
 				<div class="md-3">
 					<label class="form-label fw-bold">Home ID</label>
@@ -146,12 +148,14 @@
 		<div class="row">
 			<div class="col-md-2">
 				<div class="md-2">
+					@*saving updates to all tables*@
 					<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
 					<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> Save())">Save</button>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="md-2">
+					@*resetting values for all text boxes*@
 					<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
 					<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> Reset())">Reset</button>
 				</div>
@@ -163,6 +167,7 @@
 <br />
 <br/>
 
+@*drop down menu to toggle between tables*@
 <div class="col-md-2">
 	<div class="mb-3">
 		<label class="form-check-label fw-bold">Select Table View</label>
@@ -176,6 +181,7 @@
 </div>
 <br />
 
+@*viewing table data*@
 @if (tableViewed == "Homes")
 {
 	<h5>Home Table</h5>
@@ -259,12 +265,18 @@ else if (tableViewed == "Appliances Owned")
 	public int homeIDVal { get; set; } = 0;
 	public int unitNumVal { get; set; } = 0;
 
+	// saving updates to all tables
 	private void Save()
 	{
+		// setting homeIDs to the same values across tables
 		homeIDVal = home.homeID;
 		location.homeID = homeIDVal;
 		homeOwner.homeID = homeIDVal;
+
+		// setting current owner to true 
 		homeOwner.isCurrentOwner = true;
+
+		// setting unitNum to the same value across tables
 		unitNumVal = home.unitNum;
 		location.unitNum = unitNumVal;
 		SaveAppliancesOwned();
@@ -273,6 +285,7 @@ else if (tableViewed == "Appliances Owned")
 		SaveLocation();
 	}
 
+	// resetting all user entry values
 	private void Reset()
 	{
 		ResetAppliancesOwned();
@@ -281,7 +294,10 @@ else if (tableViewed == "Appliances Owned")
 		ResetLocation();
 	}
 
-	@code {
+}
+
+@code {
+	// creating instance of all tables with data
 	protected override async Task OnInitializedAsync()
 	{
 		GetAllAppliancesOwned();
@@ -290,124 +306,112 @@ else if (tableViewed == "Appliances Owned")
 		GetLocations();
 	}
 }
-}
 
 @code
 {
+	// creating instance of class
 	AppliancesOwned appliancesOwned = new AppliancesOwned();
 	List<AppliancesOwned> AppliancesOwned = new List<AppliancesOwned>();
 
+	// getting table data
 	private void GetAllAppliancesOwned()
 	{
 		AppliancesOwned = appliancesOwnedService.GetAppliancesOwned();
 	}
 
+	//saving updates user has made
 	private void SaveAppliancesOwned()
 	{
 		appliancesOwnedService.SaveOrUpdate(appliancesOwned);
 		ResetAppliancesOwned();
 		GetAllAppliancesOwned();
 	}
+
+	//resetting values 
 	private void ResetAppliancesOwned()
 	{
 		appliancesOwned = new AppliancesOwned();
 	}
-	private void EditAppliancesOwned(string appliancesOwnedId)
-	{
-		appliancesOwned = appliancesOwnedService.GetApplianceOwned(appliancesOwnedId);
-	}
-	private void DeleteAppliancesOwned(string appliancesOwnedId)
-	{
-		appliancesOwnedService.Delete(appliancesOwnedId);
-		GetAllAppliancesOwned();
-	}
+
 }
 
 @code {
+	// creating instance of home class
 	Home home = new Home();
 	List<Home> Homes = new List<Home>();
 	
+	//getting table data
 	private void GetHomes()
 	{
 		Homes = homeService.GetHomes();
 	}
 
+	// saving user updates 
 	private void SaveHome()
 	{
 		homeService.SaveOrUpdate(home);
 		ResetHome();
 		GetHomes();
 	}
+
+	//resetting values
 	private void ResetHome()
 	{
 		home = new Home();
 	}
-	private void EditHome(string homeId)
-	{
-		home = homeService.GetHome(homeId);
-	}
-	private void DeleteHome(string homeId)
-	{
-		homeService.Delete(homeId);
-		GetHomes();
-	}
+
 }
+
 @code {
+	// creating class instance
 	Location location = new Location();
 	List<Location> Locations = new List<Location>();
 
+	// getting table data
 	private void GetLocations()
 	{
 		Locations = locationService.GetLocations();
 	}
 
+	// saving user updates
 	private void SaveLocation()
 	{
 		locationService.SaveOrUpdate(location);
 		ResetLocation();
 		GetLocations();
 	}
+
+	//restting values
 	private void ResetLocation()
 	{
 		location = new Location();
 	}
-	private void EditLocation(string locationId)
-	{
-		location = locationService.GetLocation(locationId);
-	}
-	private void DeleteLocation(string locationId)
-	{
-		locationService.Delete(locationId);
-		GetLocations();
-	}
+	
 }
 
 @code {
+	//creating instance of class
 	HomeOwner homeOwner = new HomeOwner();
 	List<HomeOwner> HomeOwners = new List<HomeOwner>();
 
+	// getting table data
 	private void GetHomeOwners()
 	{
 		HomeOwners = homeOwnerService.GetHomeOwners();
 	}
 
+	// saving user updates to this table
 	private void SaveHomeOwner()
 	{
 		homeOwnerService.SaveOrUpdate(homeOwner);
 		ResetHomeOwner();
 		GetHomeOwners();
 	}
+
+	// resetting values
 	private void ResetHomeOwner()
 	{
 		homeOwner = new HomeOwner();
 	}
-	private void EditHomeOwner(string homeOwnerId)
-	{
-		homeOwner = homeOwnerService.GetHomeOwner(homeOwnerId);
-	}
-	private void DeleteHomeOwner(string homeOwnerId)
-	{
-		homeOwnerService.Delete(homeOwnerId);
-		GetHomeOwners();
-	}
+	
 }

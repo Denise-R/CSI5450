@@ -1,15 +1,18 @@
 ﻿@page "/AddAgent"
 @using Radzen.Blazor
 @using BalzorMongoDB.Data
+@*getting function from other files*@
 @inject BalzorMongoDB.IService.IAgent agentService
 @inject BalzorMongoDB.IService.ICompany companyService
 @inject BalzorMongoDB.IService.IEmployee employeeService
 
+@*creating page title*@
 <h3>Add a Agent</h3>
 
 <div class="col-md-12">
 	<div class="h-100 p-3 bg-white border rounded">
 		<div class="row">
+			@*creating user text boxes for user entries*@
 			<div class="col-md-2">
 				<div class="md-3">
 					<label class="form-label fw-bold">Agent ID</label>
@@ -56,12 +59,14 @@
 
 		<div class="row">
 			<div class="col-md-2">
+				@*saving updates across all tables*@
 				<div class="md-2">
 					<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
 					<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> Save())">Save</button>
 				</div>
 			</div>
 			<div class="col-md-2">
+				@*resetting values across all tables*@
 				<div class="md-2">
 					<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
 					<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> ResetAgent())">Reset</button>
@@ -74,6 +79,7 @@
 <br />
 <br/>
 
+@*drop down to select what table you want to view*@
 <div class="col-md-2">
 	<div class="mb-3">
 		<label class="form-check-label fw-bold">Select Table View</label>
@@ -86,6 +92,7 @@
 </div>
 <br />
 
+@*creating tables*@
 @if (tableViewed == "Agent")
 {
 
@@ -138,6 +145,8 @@ else if (tableViewed == "Employee")
 @code {
 	public string tableViewed { get; set; } = "Agent";
 	public int agentIDVal { get; set; } = 0;
+
+	//saving all user updates (all tables)
 	private void Save()
 	{
 		agentIDVal = agent.agentID;
@@ -147,12 +156,14 @@ else if (tableViewed == "Employee")
 		SaveEmployee();
 	}
 
+	// resetting values across all tables
 	private void Reset()
 	{
 		ResetAgent();
 		ResetEmployee();
 	}
 
+	// creating instance of all table classes
 	protected override async Task OnInitializedAsync()
 	{
 		GetAgents();
@@ -162,93 +173,84 @@ else if (tableViewed == "Employee")
 }
 
 @code {
+	// creating table class
 	Agent agent = new Agent();
 	List<Agent> Agents = new List<Agent>();
 
+	// getting table values
 	private void GetAgents()
 	{
 		Agents = agentService.GetAgents();
 	}
 
+	//saving user updates
 	private void SaveAgent()
 	{
 		agentService.SaveOrUpdate(agent);
 		ResetAgent();
 		GetAgents();
 	}
+
+	// resetting values for this table only
 	private void ResetAgent()
 	{
 		agent = new Agent();
 	}
-	private void EditAgent(string agentId)
-	{
-		agent = agentService.GetAgent(agentId);
-	}
-	private void DeleteAgent(string agentId)
-	{
-		agentService.Delete(agentId);
-		GetAgents();
-	}
+
 }
 
 @code
 {
+	// creating company
 	Company company = new Company();
 	List<Company> Companies = new List<Company>();
 
+	// getting table data
 	private void GetCompanies()
 	{
 		Companies = companyService.GetCompanies();
 	}
 
+	// saving updates to this table
 	private void SaveCompany()
 	{
 		companyService.SaveOrUpdate(company);
 		ResetCompany();
 		GetCompanies();
 	}
+
+	// resetting values for this table only
 	private void ResetCompany()
 	{
 		company = new Company();
 	}
-	private void EditCompany(string companyId)
-	{
-		company = companyService.GetCompany(companyId);
-	}
-	private void DeleteCompany(string companyId)
-	{
-		companyService.Delete(companyId);
-		GetCompanies();
-	}
+	
 }
 
 
 @code {
+	// creating employee instance
 	Employee employee = new Employee();
 	List<Employee> Employees = new List<Employee>();
 
+	//getting table data
 	private void GetEmployees()
 	{
 		Employees = employeeService.GetEmployees();
 	}
 
+	// saving updates made to this table
 	private void SaveEmployee()
 	{
 		employeeService.SaveOrUpdate(employee);
 		ResetEmployee();
 		GetEmployees();
 	}
+
+	// resetting values for this table only
 	private void ResetEmployee()
 	{
 		employee = new Employee();
 	}
-	private void EditEmployee(string employeeId)
-	{
-		employee = employeeService.GetEmployee(employeeId);
-	}
-	private void DeleteEmployee(string employeeId)
-	{
-		employeeService.Delete(employeeId);
-		GetEmployees();
-	}
+	
 }

@@ -5,10 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+// creating class for Home table 
+
 namespace BalzorMongoDB.Data
 {
 	public class Home
 	{
+		// creating Home instance
+
 		[BsonRepresentation(BsonType.ObjectId)]
 		public string _id { get; set; } = 
 			MongoDB.Bson.ObjectId.GenerateNewId().ToString();

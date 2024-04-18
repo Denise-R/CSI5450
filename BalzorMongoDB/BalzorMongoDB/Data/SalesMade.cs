@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+// creating class for SalesMade table 
 namespace BalzorMongoDB.Data
 {
 	public class SalesMade
 	{
+		// creating SalesMade instance
 		[BsonRepresentation(BsonType.ObjectId)]
 		public string _id { get; set; } = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
 		public string ownerID { get; set; } = ""; //same as SSN

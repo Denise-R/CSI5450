@@ -6,31 +6,37 @@ namespace BalzorMongoDB.Service
 {
 	public class HomeOwnerService : IHomeOwner
 	{
+		// creating connection to database
 		private MongoClient _mongoClient = null;
 		private IMongoDatabase _database = null;
 		private IMongoCollection<HomeOwner> _homeOwnerTable = null;
 		public HomeOwnerService()
 		{
 			_mongoClient = new MongoClient("mongodb://127.0.0.1:27017/");
-			_database = _mongoClient.GetDatabase("RealEstate"); // fix me
+			_database = _mongoClient.GetDatabase("RealEstate"); 
 			_homeOwnerTable = _database.GetCollection<HomeOwner>("HomeOwner");
 		}
+
+		// creating function to delete one entry
 		public string Delete(string homeOwnerID)
 		{
 			_homeOwnerTable.DeleteOne(x => x._id == homeOwnerID);
 			return "Deleted";
 		}
 
+		// getting one entry 
 		public HomeOwner GetHomeOwner(string homeOwnerID)
 		{
 			return _homeOwnerTable.Find(x => x._id == homeOwnerID).FirstOrDefault();
 		}
 
+		//getting all entries
 		public List<HomeOwner> GetHomeOwners()
 		{
 			return _homeOwnerTable.Find(FilterDefinition<HomeOwner>.Empty).ToList();
 		}
 
+		// function to add or update an entry
 		public void SaveOrUpdate(HomeOwner homeOwner)
 		{
 			var homeOwnerObj = _homeOwnerTable.Find(x => x._id == homeOwner._id).FirstOrDefault();

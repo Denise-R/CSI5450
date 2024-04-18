@@ -5,10 +5,12 @@
 @using BalzorMongoDB.IService;
 @using MongoDB.Driver;
 
+@*page header*@
 <h5>Select a Filter</h5>
 <br/>
 <br/>
 
+@*drop down to toggle betweeen filters avalible*@
 <div class="col-md-3">
 	<div class="mb-3">
 		<label class="form-check-label fw-bold">Select Table View</label>
@@ -27,6 +29,7 @@
 	</div>
 </div>
 <br />
+@*displaying user entry boxes based on filter selected*@
 <div class="col-md-12">
 	<div class="h-100 p-3 bg-white border rounded">
 		@if (filterSelection == "filter1")
@@ -50,12 +53,15 @@
 						<input type="text" class="form-control" @bind="cityVar" style="width:100%;" />
 					</div>
 				</div>
+
+				@*viewing user entry filter settings*@
 				<div class="col-md-2">
 					<div class="md-2">
 						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
 						<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> refreshF1())">Submit</button>
 					</div>
 				</div>
+			@*	resetting entry boxes*@
 				<div class="col-md-2">
 					<div class="md-2">
 						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
@@ -66,6 +72,7 @@
 		}
 		@if (filterSelection == "filter2")
 		{
+			@*refreshing filter*@
 			<div class="row">
 				<div class="col-md-2">
 					<div class="md-2">
@@ -83,12 +90,14 @@
 						<input type="text" class="form-control" @bind="ownerIDVar" style="width:100%;" />
 					</div>
 				</div>
+				@*viewing user entry filter settings*@
 				<div class="col-md-2">
 					<div class="md-2">
 						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
 						<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> refreshF3())">Submit</button>
 					</div>
 				</div>
+				@*resetting entry boxes*@
 				<div class="col-md-2">
 					<div class="md-2">
 						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
@@ -106,12 +115,14 @@
 						<input type="text" class="form-control" @bind="manufacturerVar" style="width:100%;" />
 					</div>
 				</div>
+				@*viewing user entry filter settings*@
 				<div class="col-md-2">
 					<div class="md-2">
 						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
 						<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> refreshF4())">Submit</button>
 					</div>
 				</div>
+				@*resetting entry boxes*@
 				<div class="col-md-2">
 					<div class="md-2">
 						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
@@ -132,12 +143,14 @@
 						</select>
 					</div>
 				</div>
+				@*viewing user entry filter settings*@
 				<div class="col-md-2">
 					<div class="md-2">
 						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
 						<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> refreshF5())">Submit</button>
 					</div>
 				</div>
+				@*resetting entry boxes*@
 				<div class="col-md-2">
 					<div class="md-2">
 						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
@@ -155,12 +168,14 @@
 						<input type="number"  class="form-control" @bind="a_idVar" style="width:100%;" />
 					</div>
 				</div>
+				@*viewing user entry filter settings*@
 				<div class="col-md-2">
 					<div class="md-2">
 						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
 						<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> refreshF6())">Submit</button>
 					</div>
 				</div>
+				@*resetting entry boxes*@
 				<div class="col-md-2">
 					<div class="md-2">
 						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
@@ -171,6 +186,7 @@
 		}
 		@if (filterSelection == "filter7")
 		{
+			@*refreshing filter*@
 			<div class="row">
 				<div class="col-md-2">
 					<div class="md-2">
@@ -194,12 +210,14 @@
 						<input type="number" min="0" class="form-control" @bind="priceVar" style="width:100%;" />
 					</div>
 				</div>
+				@*viewing user entry filter settings*@
 				<div class="col-md-2">
 					<div class="md-2">
 						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
 						<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> refreshF8())">Submit</button>
 					</div>
 				</div>
+				@*resettign user entries*@
 				<div class="col-md-2">
 					<div class="md-2">
 						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
@@ -217,12 +235,14 @@
 						<input type="text" class="form-control" @bind="cityNameVar" style="width:100%;" />
 					</div>
 				</div>
+				@*viewing user entry filter settings*@
 				<div class="col-md-2">
 					<div class="md-2">
 						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
 						<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> refreshF9())">Submit</button>
 					</div>
 				</div>
+				@*resetting user entries*@
 				<div class="col-md-2">
 					<div class="md-2">
 						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
@@ -261,12 +281,14 @@
 						<input type="number" min="0" class="form-control" @bind="bathRoomsVar" style="width:100%;" />
 					</div>
 				</div>
+				@*viewing user entry filter settings*@
 				<div class="col-md-2">
 					<div class="md-2">
 						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
 						<button class="form-control btn btn-success btn-sm fw-bold" style="margin-top:4px;font-size:14px;" @onclick="@(e=> refreshF10())">Submit</button>
 					</div>
 				</div>
+				@*resetting user entries*@
 				<div class="col-md-2">
 					<div class="md-2">
 						<label class="form-label fw-bold">&nbsp;&nbsp;&nbsp;</label>
@@ -281,6 +303,7 @@
 <br/>
 
 
+@*displaying filter tables*@
 @if (filterSelection == "filter1")
 {
 	@if (filterResult1 != null && filterResult1.Any())
@@ -427,6 +450,7 @@
 						<td>@home["homeType"]</td>
 						<td>@home["extraFeatures"]</td>
 						<td>@home["unitNum"]</td>
+						@*unpacking values from appliances document*@
 						<td>
 							@if (home.Contains("appliances") && home["appliances"] is BsonDocument appliances)
 							{
@@ -443,6 +467,7 @@
 								}
 							}
 						</td>
+						@*unpacking values from applianceDetails document*@
 						<td>
 							@if (home.Contains("applianceDetails") && home["applianceDetails"] is BsonArray applianceDetails)
 							{
@@ -504,6 +529,7 @@
 						<td>@person["age"]</td>
 						<td>@person["profession"]</td>
 						<td>@person["isCurrentOwner"]</td>
+						@*unpacking values from ownedHomes document*@
 						<td>
 							@if (person.Contains("ownedHomes") && person["ownedHomes"] is BsonArray ownedHomes)
 							{
@@ -554,6 +580,7 @@
 					{
 						<tr>
 							<td>@person["totalCommission"]</td>
+						@*unpacking values from agent document*@
 							<td>
 								@if (person.Contains("agent") && person["agent"] is BsonArray agent)
 								{
@@ -603,6 +630,7 @@
 			<tbody>
 				@foreach (var document in filterResult7)
 				{
+					@*unpacking values from _id document*@
 				<tr>
 					@if (document.Contains("_id") && document["_id"] is BsonDocument _id)
 					{
@@ -704,6 +732,7 @@
 						<td>@value["homeType"]</td>
 						<td>@value["extraFeatures"]</td>
 						<td>@value["unitNum"]</td>
+						@*unpacking values from location document*@
 						<td>
 							@if (value.Contains("location") && value["location"] is BsonArray location)
 							{
@@ -728,6 +757,7 @@
 								<span>No data</span>
 							}
 						</td>
+						@*unpacking values from owner document*@
 						<td>
 							@if (value.Contains("owner") && value["owner"] is BsonArray owner)
 							{
@@ -832,6 +862,7 @@
 }
 
 @code{
+	// creating instances of vars
 	static public string fnameVar { get; set; } = "Alice";
 	static public string lnameVar { get; set; } = "Johnson";
 	static public string cityVar { get; set; } = "Ann Arbor";
@@ -839,6 +870,7 @@
 
 	public static List<BsonDocument> filter1(string fName, string lName, string city)
 	{
+		//connecting to database
 		MongoClient _mongoClient = new MongoClient("mongodb://127.0.0.1:27017/");
 		IMongoDatabase _database = _mongoClient.GetDatabase("RealEstate");
 		IMongoCollection<HomeOwner> _homeOwnerTable = 
@@ -893,6 +925,7 @@
 			}
 		} };
 
+		// building query
 		BsonDocument[] pipeline = new BsonDocument[] {
 			pipelineStage1,
 			pipelineStage2,
@@ -902,11 +935,13 @@
 			pipelineStage6
 	};
 
+		// returning filtered results
 		List<BsonDocument> pResults = 
 			_collection.Aggregate<BsonDocument>(pipeline).ToList();
 		return pResults;
 	}
 
+	//updating table based on user entries
 	public void refreshF1()
 	{
 		filterResult1 = filter1(fnameVar, lnameVar, cityVar);
@@ -914,10 +949,12 @@
 }
 
 @code{
+	// creating instances of vars
 	List<BsonDocument> filterResult2 = filter2();
 
 	public static List<BsonDocument> filter2()
 	{
+		//connecting to database
 		MongoClient _mongoClient = new MongoClient("mongodb://127.0.0.1:27017/");
 		IMongoDatabase _database = _mongoClient.GetDatabase("RealEstate");
 		IMongoCollection<SalesMade> _collection = _database.GetCollection<SalesMade>("SalesMade");
@@ -930,17 +967,19 @@
 			{"$match", new BsonDocument{{"count", new BsonDocument{{ "$gt", 1 }}}}}
 		};
 
-
+		//building query
 		BsonDocument[] pipeline = new BsonDocument[] {
 		pipelineStage1,
 		pipelineStage2
 	};
 
+	//returning filter table
 		List<BsonDocument> pResults = _collection.Aggregate<BsonDocument>(pipeline).ToList();
 
 		return pResults;
 	}
 
+	//refreshing table
 	public void refreshF2()
 	{
 		filterResult2 = filter2();
@@ -948,9 +987,11 @@
 }
 
 @code{
+	// creating instances of vars
 	static public string ownerIDVar { get; set; } = "111-22-3333";
 	List<BsonDocument> filterResult3 = filter3(ownerIDVar);
 
+	//connecting to database
 	public static List<BsonDocument> filter3(string ownerID)
 	{
 		MongoClient _mongoClient = new MongoClient("mongodb://127.0.0.1:27017/");
@@ -974,17 +1015,20 @@
 		BsonDocument pipelineStage3 = new BsonDocument{
 		{ "$limit", 1 }};
 
+		// building query
 		BsonDocument[] pipeline = new BsonDocument[] {
 			pipelineStage1,
 			pipelineStage2,
 			pipelineStage3
 	};
 
+	// returning filtered table
 		List<BsonDocument> pResults = _collection.Aggregate<BsonDocument>(pipeline).ToList();
 
 		return pResults;
 	}
 
+	//query based on user entries
 	public void refreshF3()
 	{
 		filterResult3 = filter3(ownerIDVar);
@@ -992,9 +1036,11 @@
 }
 
 @code{
+	// creating instances of vars
 	static public string manufacturerVar { get; set; } = "LG";
 	List<BsonDocument> filterResult4 = filter4("LG");
 
+	// connecting to database
 	public static List<BsonDocument> filter4(string manufacturer)
 	{
 		MongoClient _mongoClient = new MongoClient("mongodb://127.0.0.1:27017/");
@@ -1030,6 +1076,7 @@
 			}
 		}};
 
+		//building query
 		BsonDocument[] pipeline = new BsonDocument[] {
 			pipelineStage1,
 			pipelineStage2,
@@ -1037,12 +1084,14 @@
 			pipelineStage4
 		};
 
+		//returning filtered table
 		List<BsonDocument> pResults = 
 			_collection.Aggregate<BsonDocument>(pipeline).ToList();
 
 		return pResults;
 	}
 	
+	// query based on user entry
 	public void refreshF4()
 	{
 		filterResult4 = filter4(manufacturerVar);
@@ -1051,10 +1100,12 @@
 }
 
 @code{
+	// creating instances of vars
 	public string tableBoolVal { get; set; } = "True";
 	static public bool isOwnerVar { get; set; } = true;
 	List<BsonDocument> filterResult5 = filter5(true);
 
+	//connecting to databse
 	public static List<BsonDocument> filter5(bool isOwner)
 	{
 		MongoClient _mongoClient = new MongoClient("mongodb://127.0.0.1:27017/");
@@ -1078,15 +1129,18 @@
 			}
 		}};
 
+		//building query
 		BsonDocument[] pipeline = new BsonDocument[] {
 			pipelineStage1,
 			pipelineStage2
 	};
 
+	//returning filter result
 		List<BsonDocument> pResults = _collection.Aggregate<BsonDocument>(pipeline).ToList();
 		return pResults;
 	}
 
+	//setting data type and query to get filter based on user entry 
 	public void refreshF5()
 	{
 		if(tableBoolVal == "True")
@@ -1102,9 +1156,11 @@
 }
 
 @code{
+	// creating instances of vars
 	static public int a_idVar { get; set; } = 104;
 	List<BsonDocument> filterResult6 = filter6(104);
 
+	//connecting to database
 	public static List<BsonDocument> filter6(int a_id)
 	{
 		MongoClient _mongoClient = new MongoClient("mongodb://127.0.0.1:27017/");
@@ -1155,6 +1211,7 @@
 			}
 		}};
 
+		// building query
 		BsonDocument[] pipeline = new BsonDocument[] {
 			pipelineStage1,
 			pipelineStage2,
@@ -1164,11 +1221,13 @@
 			pipelineStage6
 		};
 
+		//returning filtered result
 		List<BsonDocument> pResults = _collection.Aggregate<BsonDocument>(pipeline).ToList();
 
 		return pResults;
 	}
 
+	// submitting user filter query
 	public void refreshF6()
 	{
 		filterResult6 = filter6(a_idVar);
@@ -1176,8 +1235,10 @@
 }
 
 @code{
+	// creating instances of vars
 	List<BsonDocument> filterResult7 = filter7();
 
+	//connecting to databse
 	public static List<BsonDocument> filter7()
 	{
 		MongoClient _mongoClient = new MongoClient("mongodb://127.0.0.1:27017/");
@@ -1214,11 +1275,13 @@
 			})
 		};
 
+		//executing query
 		List<BsonDocument> pResults = _collection.Aggregate<BsonDocument>(pipeline).ToList();
 
 		return pResults;
 	} 
 
+	//refreshing query
 	public void refreshF7()
 	{
 		filterResult7 = filter7();
@@ -1226,10 +1289,12 @@
 }
 
 @code{
+	// creating instances of vars
 	static public string city_8_Var { get; set; } = "Rochester";
 	static public int priceVar { get; set; } = 1000000000;
 	List<BsonDocument> filterResult8 = filter8(city_8_Var, priceVar);
 
+	//connecting to databse
 	public static List<BsonDocument> filter8(string city, int price)
 	{
 		MongoClient _mongoClient = new MongoClient("mongodb://127.0.0.1:27017/");
@@ -1280,6 +1345,7 @@
 			}
 		}};
 
+		//building query
 		BsonDocument[] pipeline = new BsonDocument[] {
 			pipelineStage1,
 			pipelineStage2,
@@ -1288,11 +1354,13 @@
 			pipelineStage5
 		};
 
+		//exec query
 		List<BsonDocument> pResults = _collection.Aggregate<BsonDocument>(pipeline).ToList();
 
 		return pResults;
 	}
 
+	//filtering based on user entries
 	public void refreshF8()
 	{
 		filterResult8 = filter8(city_8_Var, priceVar);
@@ -1300,9 +1368,11 @@
 }
 
 @code{
+	// creating instances of vars
 	static public string cityNameVar { get; set; } = "Auburn Hills";
 	List<BsonDocument> filterResult9 = filter9(cityNameVar);
 
+	//connecting to databse
 	public static List<BsonDocument> filter9(string location)
 	{
 		MongoClient _mongoClient = new MongoClient("mongodb://127.0.0.1:27017/");
@@ -1360,6 +1430,7 @@
 		BsonDocument pipelineStage7 = new BsonDocument{
 		{ "$limit", 1 }};
 
+		//building query
 		BsonDocument[] pipeline = new BsonDocument[] {
 			pipelineStage1,
 			pipelineStage2,
@@ -1370,11 +1441,13 @@
 			pipelineStage7
 	};
 
+		// exec query
 		List<BsonDocument> pResults = _collection.Aggregate<BsonDocument>(pipeline).ToList();
 
 		return pResults;
 	}
 
+	// filtering based on user entries
 	public void refreshF9()
 	{
 		filterResult9 = filter9(cityNameVar);
@@ -1382,6 +1455,7 @@
 }
 
 @code{
+	// creating instances of vars
 	static public string locationVar { get; set; } = "Ann Arbor";
 	static public bool isSoldVar { get; set; } = false;
 	static public string isSoldTableVar { get; set; } = "False";
@@ -1389,6 +1463,7 @@
 	static public int bathRoomsVar { get; set; } = 3;
 	List<BsonDocument> filterResult10 = filter10(locationVar, isSoldVar, bedRoomsVar, bathRoomsVar);
 
+	// connecting to database
 	public static List<BsonDocument> filter10(string location, bool isSold, int bedRooms, int bathrooms)
 	{
 		MongoClient _mongoClient = new MongoClient("mongodb://127.0.0.1:27017/");
@@ -1446,6 +1521,7 @@
 			}
 		}};
 
+		//building query
 		BsonDocument[] pipeline = new BsonDocument[] {
 			pipelineStage1,
 			pipelineStage2,
@@ -1456,13 +1532,16 @@
 			pipelineStage7
 		};
 
+		//exec query
 		List<BsonDocument> pResults = _collection.Aggregate<BsonDocument>(pipeline).ToList();
 
 		return pResults;
 	}
 
+	//filtering based on user entries
 	public void refreshF10()
 	{
+		//converting data type
 		if (isSoldTableVar == "True")
 		{
 			isSoldVar = true;

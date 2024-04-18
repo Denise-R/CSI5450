@@ -1,6 +1,7 @@
 ﻿@page "/Tables"
 @using Radzen.Blazor
 @using BalzorMongoDB.Data
+@*getting date from other files*@
 @inject BalzorMongoDB.IService.IAgent agentService
 @inject BalzorMongoDB.IService.IAppliances appliancesService
 @inject BalzorMongoDB.IService.IAppliancesOwned appliancesOwnedService
@@ -13,11 +14,12 @@
 @inject BalzorMongoDB.IService.ILocation locationService
 @inject BalzorMongoDB.IService.ISalesMade salesMadeService
 
+@*page title*@
 <h5>Real Estate Database</h5>
 <br/>
 <br/>
 
-
+@*drop down to switch between tables*@
 <div class="col-md-2">
 	<div class="mb-3">
 		<label class="form-check-label fw-bold">Select Table View</label>
@@ -38,6 +40,7 @@
 </div>
 <br />
 
+@*Displaying table when table view type selected*@
 @if (tableViewed == "Agent")
 {
 	
@@ -218,13 +221,13 @@ else if (tableViewed == "Sales Made")
 }
 
 
-
+@*variable to check table selected*@
 @code{
 	public string tableViewed { get; set; } = "Homes";
 }
 
 
-
+@*creating instance of each table on page creation*@
 @code {
 	protected override async Task OnInitializedAsync()
 	{
@@ -243,334 +246,138 @@ else if (tableViewed == "Sales Made")
 }
 
 @code {
+	//Creating instance of class
 	Agent agent = new Agent();
 	List<Agent> Agents = new List<Agent>();
 
+	//calling view table function
 	private void GetAgents()
 	{
 		Agents = agentService.GetAgents();
 	}
-
-	private void SaveAgent()
-	{
-		agentService.SaveOrUpdate(agent);
-		ResetAgent();
-		GetAgents();
-	}
-	private void ResetAgent()
-	{
-		agent = new Agent();
-	}
-	private void EditAgent(string agentId)
-	{
-		agent = agentService.GetAgent(agentId);
-	}
-	private void DeleteAgent(string agentId)
-	{
-		agentService.Delete(agentId);
-		GetAgents();
-	}
 }
 
 @code {
+	//Creating instance of class
 	Appliances appliances = new Appliances();
 	List<Appliances> AppliancesList = new List<Appliances>();
 
+	//calling view table function
 	private void GetAppliances()
 	{
 		AppliancesList = appliancesService.GetAppliances();
 	}
 
-	private void SaveAppliances()
-	{
-		appliancesService.SaveOrUpdate(appliances);
-		ResetAppliances();
-		GetAppliances();
-	}
-	private void ResetAppliances()
-	{
-		appliances = new Appliances();
-	}
-	private void EditAppliances(string appliancesId)
-	{
-		appliances = appliancesService.GetAppliance(appliancesId);
-	}
-	private void DeleteAppliances(string appliancesId)
-	{
-		appliancesService.Delete(appliancesId);
-		GetAppliances();
-	}
 }
 
 @code
 {
+	//Creating instance of class
 	AppliancesOwned appliancesOwned = new AppliancesOwned();
 	List<AppliancesOwned> AppliancesOwned = new List<AppliancesOwned>();
 
+	//calling view table function
 	private void GetAllAppliancesOwned()
 	{
 		AppliancesOwned = appliancesOwnedService.GetAppliancesOwned();
 	}
 
-	private void SaveAppliancesOwned()
-	{
-		appliancesOwnedService.SaveOrUpdate(appliancesOwned);
-		ResetAppliancesOwned();
-		GetAllAppliancesOwned();
-	}
-	private void ResetAppliancesOwned()
-	{
-		appliancesOwned = new AppliancesOwned();
-	}
-	private void EditAppliancesOwned(string appliancesOwnedId)
-	{
-		appliancesOwned = appliancesOwnedService.GetApplianceOwned(appliancesOwnedId);
-	}
-	private void DeleteAppliancesOwned(string appliancesOwnedId)
-	{
-		appliancesOwnedService.Delete(appliancesOwnedId);
-		GetAllAppliancesOwned();
-	}
 }
 
 @code
 {
+	//Creating instance of class
 	Company company = new Company();
 	List<Company> Companies = new List<Company>();
 
+	//calling view table function
 	private void GetCompanies()
 	{
 		Companies = companyService.GetCompanies();
 	}
-
-	private void SaveCompany()
-	{
-		companyService.SaveOrUpdate(company);
-		ResetCompany();
-		GetCompanies();
-	}
-	private void ResetCompany()
-	{
-		company = new Company();
-	}
-	private void EditCompany(string companyId)
-	{
-		company = companyService.GetCompany(companyId);
-	}
-	private void DeleteCompany(string companyId)
-	{
-		companyService.Delete(companyId);
-		GetCompanies();
-	}
 }
 
 @code
 {
+	//Creating instance of class
 	County county = new County();
 	List<County> Counties = new List<County>();
 
+	//calling view table function
 	private void GetCounties()
 	{
 		Counties = countyService.GetCounties();
 	}
-
-	private void SaveCounty()
-	{
-		countyService.SaveOrUpdate(county);
-		ResetCounty();
-		GetCounties();
-	}
-	private void ResetCounty()
-	{
-		county = new County();
-	}
-	private void EditCounty(string countyId)
-	{
-		county = countyService.GetCounty(countyId);
-	}
-	private void DeleteCounty(string countyId)
-	{
-		countyService.Delete(countyId);
-		GetCounties();
-	}
 }
 
 @code {
+	//Creating instance of class
 	Employee employee = new Employee();
 	List<Employee> Employees = new List<Employee>();
 
+	//calling view table function
 	private void GetEmployees()
 	{
 		Employees = employeeService.GetEmployees();
 	}
-
-	private void SaveEmployee()
-	{
-		employeeService.SaveOrUpdate(employee);
-		ResetEmployee();
-		GetEmployees();
-	}
-	private void ResetEmployee()
-	{
-		employee = new Employee();
-	}
-	private void EditEmployee(string employeeId)
-	{
-		employee = employeeService.GetEmployee(employeeId);
-	}
-	private void DeleteEmployee(string employeeId)
-	{
-		employeeService.Delete(employeeId);
-		GetEmployees();
-	}
 }
 
 @code {
+	//Creating instance of class
 	Home home = new Home();
 	List<Home> Homes = new List<Home>();
 	
+	//calling view table function
 	private void GetHomes()
 	{
 		Homes = homeService.GetHomes();
 	}
-
-	private void SaveHome()
-	{
-		homeService.SaveOrUpdate(home);
-		ResetHome();
-		GetHomes();
-	}
-	private void ResetHome()
-	{
-		home = new Home();
-	}
-	private void EditHome(string homeId)
-	{
-		home = homeService.GetHome(homeId);
-	}
-	private void DeleteHome(string homeId)
-	{
-		homeService.Delete(homeId);
-		GetHomes();
-	}
 }
 
 @code {
+	//Creating instance of class
 	HomeOwner homeOwner = new HomeOwner();
 	List<HomeOwner> HomeOwners = new List<HomeOwner>();
 
+	//calling view table function
 	private void GetHomeOwners()
 	{
 		HomeOwners = homeOwnerService.GetHomeOwners();
 	}
-
-	private void SaveHomeOwner()
-	{
-		homeOwnerService.SaveOrUpdate(homeOwner);
-		ResetHomeOwner();
-		GetHomeOwners();
-	}
-	private void ResetHomeOwner()
-	{
-		homeOwner = new HomeOwner();
-	}
-	private void EditHomeOwner(string homeOwnerId)
-	{
-		homeOwner = homeOwnerService.GetHomeOwner(homeOwnerId);
-	}
-	private void DeleteHomeOwner(string homeOwnerId)
-	{
-		homeOwnerService.Delete(homeOwnerId);
-		GetHomeOwners();
-	}
 }
 
 @code {
+	//Creating instance of class
 	Listing listing = new Listing();
 	List<Listing> Listings = new List<Listing>();
 
+	//calling view table function
 	private void GetListings()
 	{
 		Listings = listingService.GetListings();
 	}
-
-	private void SaveListing()
-	{
-		listingService.SaveOrUpdate(listing);
-		ResetListing();
-		GetListings();
-	}
-	private void ResetListing()
-	{
-		listing = new Listing();
-	}
-	private void EditListing(string listingId)
-	{
-		listing = listingService.GetListing(listingId);
-	}
-	private void DeleteListing(string listingId)
-	{
-		listingService.Delete(listingId);
-		GetListings();
-	}
 }
 
 @code {
+	//Creating instance of class
 	Location location = new Location();
 	List<Location> Locations = new List<Location>();
 
+	//calling view table function
 	private void GetLocations()
 	{
 		Locations = locationService.GetLocations();
 	}
-
-	private void SaveLocation()
-	{
-		locationService.SaveOrUpdate(location);
-		ResetLocation();
-		GetLocations();
-	}
-	private void ResetLocation()
-	{
-		location = new Location();
-	}
-	private void EditLocation(string locationId)
-	{
-		location = locationService.GetLocation(locationId);
-	}
-	private void DeleteLocation(string locationId)
-	{
-		locationService.Delete(locationId);
-		GetLocations();
-	}
 }
 
 @code {
+	//Creating instance of class
 	SalesMade salesMade = new SalesMade();
 	List<SalesMade> SalesMadeList = new List<SalesMade>();
 
+	//calling view table function
 	private void GetAllSalesMade()
 	{
 		SalesMadeList = salesMadeService.GetSalesMade();
-	}
-
-	private void SaveSalesMade()
-	{
-		salesMadeService.SaveOrUpdate(salesMade);
-		ResetSalesMade();
-		GetAllSalesMade();
-	}
-	private void ResetSalesMade()
-	{
-		salesMade = new SalesMade();
-	}
-	private void EditSalesMade(string salesMadeId)
-	{
-		salesMade = salesMadeService.GetSaleMade(salesMadeId);
-	}
-	private void DeleteSalesMade(string salesMadeId)
-	{
-		salesMadeService.Delete(salesMadeId);
-		GetAllSalesMade();
 	}
 }

@@ -863,9 +863,9 @@
 
 @code{
 	// creating instances of vars
-	static public string fnameVar { get; set; } = "Alice";
-	static public string lnameVar { get; set; } = "Johnson";
-	static public string cityVar { get; set; } = "Ann Arbor";
+	static public string fnameVar { get; set; } = "Matt";
+	static public string lnameVar { get; set; } = "Smith";
+	static public string cityVar { get; set; } = "Greentown";
 	List<BsonDocument> filterResult1 = filter1(fnameVar, lnameVar, cityVar);
 
 	public static List<BsonDocument> filter1(string fName, string lName, string city)
@@ -1085,8 +1085,7 @@
 		};
 
 		//returning filtered table
-		List<BsonDocument> pResults = 
-			_collection.Aggregate<BsonDocument>(pipeline).ToList();
+		List<BsonDocument> pResults = _collection.Aggregate<BsonDocument>(pipeline).ToList();
 
 		return pResults;
 	}
@@ -1157,7 +1156,7 @@
 
 @code{
 	// creating instances of vars
-	static public int a_idVar { get; set; } = 104;
+	static public int a_idVar { get; set; } = 103;
 	List<BsonDocument> filterResult6 = filter6(104);
 
 	//connecting to database
@@ -1290,7 +1289,7 @@
 
 @code{
 	// creating instances of vars
-	static public string city_8_Var { get; set; } = "Rochester";
+	static public string city_8_Var { get; set; } = "Mountainview";
 	static public int priceVar { get; set; } = 1000000000;
 	List<BsonDocument> filterResult8 = filter8(city_8_Var, priceVar);
 
@@ -1369,7 +1368,7 @@
 
 @code{
 	// creating instances of vars
-	static public string cityNameVar { get; set; } = "Auburn Hills";
+	static public string cityNameVar { get; set; } = "Mountainview";
 	List<BsonDocument> filterResult9 = filter9(cityNameVar);
 
 	//connecting to databse
@@ -1456,11 +1455,11 @@
 
 @code{
 	// creating instances of vars
-	static public string locationVar { get; set; } = "Ann Arbor";
+	static public string locationVar { get; set; } = "Rivertown";
 	static public bool isSoldVar { get; set; } = false;
 	static public string isSoldTableVar { get; set; } = "False";
 	static public int bedRoomsVar { get; set; } = 3;
-	static public int bathRoomsVar { get; set; } = 3;
+	static public int bathRoomsVar { get; set; } = 2;
 	List<BsonDocument> filterResult10 = filter10(locationVar, isSoldVar, bedRoomsVar, bathRoomsVar);
 
 	// connecting to database

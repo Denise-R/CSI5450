@@ -1,6 +1,9 @@
 ﻿@page "/UpdateListing"
 @using Radzen.Blazor
 @using BalzorMongoDB.Data
+@using MongoDB.Bson;
+@using BalzorMongoDB.IService;
+@using MongoDB.Driver;
 @inject BalzorMongoDB.IService.IListing listingService
 @inject BalzorMongoDB.IService.IHomeOwner homeOwnerService
 
@@ -176,6 +179,7 @@
 		homeOwner.SSN = SSNVal;
 		homeOwner.isCurrentOwner = true;
 		SaveListing();
+		UpdateHomeOwner(homeIDVal);
 		SaveHomeOwner();
 
 		// hidding editing entries unitl selected again from listings table
@@ -190,6 +194,8 @@
 	}
 
 }
+
+
 
 
 @code {
@@ -263,6 +269,12 @@
 	private void ResetHomeOwner()
 	{
 		homeOwner = new HomeOwner();
+	}
+
+	// setting pervious owner isCurentOwner to false
+	private void UpdateHomeOwner(int homeIDVal)
+	{
+		homeOwnerService.UpdatePrevOwner(homeIDVal);
 	}
 
 }

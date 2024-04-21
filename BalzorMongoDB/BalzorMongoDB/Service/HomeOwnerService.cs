@@ -49,5 +49,19 @@ namespace BalzorMongoDB.Service
 				_homeOwnerTable.ReplaceOne(x => x._id == homeOwner._id, homeOwner);
 			}
 		}
+
+
+		public void UpdatePrevOwner(int homeIDVar)
+		{
+			var filter = Builders<HomeOwner>.Filter.And(
+				Builders<HomeOwner>.Filter.Eq(x => x.homeID, homeIDVar),
+				Builders<HomeOwner>.Filter.Eq(x => x.isCurrentOwner, true)
+			);
+
+			var update = Builders<HomeOwner>.Update.Set(x => x.isCurrentOwner, false);
+
+			_homeOwnerTable.UpdateMany(filter, update);
+		}
+
 	}
 }

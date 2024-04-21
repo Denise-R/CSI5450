@@ -13,7 +13,7 @@
 @*drop down to toggle betweeen filters avalible*@
 <div class="col-md-3">
 	<div class="mb-3">
-		<label class="form-check-label fw-bold">Select Table View</label>
+		<label class="form-check-label fw-bold">Select Filter Type</label>
 		<select class="form-select" @bind="filterSelection">
 			<option value="filter1">Homes per Owner</option>
 			<option value="filter2">Homes Sold Multiple Times</option>
@@ -863,9 +863,9 @@
 
 @code{
 	// creating instances of vars
-	static public string fnameVar { get; set; } = "Matt";
-	static public string lnameVar { get; set; } = "Smith";
-	static public string cityVar { get; set; } = "Greentown";
+	static public string fnameVar { get; set; } = "";
+	static public string lnameVar { get; set; } = "";
+	static public string cityVar { get; set; } = "";
 	List<BsonDocument> filterResult1 = filter1(fnameVar, lnameVar, cityVar);
 
 	public static List<BsonDocument> filter1(string fName, string lName, string city)
@@ -988,7 +988,7 @@
 
 @code{
 	// creating instances of vars
-	static public string ownerIDVar { get; set; } = "111-22-3333";
+	static public string ownerIDVar { get; set; } = "";
 	List<BsonDocument> filterResult3 = filter3(ownerIDVar);
 
 	//connecting to database
@@ -1037,8 +1037,8 @@
 
 @code{
 	// creating instances of vars
-	static public string manufacturerVar { get; set; } = "LG";
-	List<BsonDocument> filterResult4 = filter4("LG");
+	static public string manufacturerVar { get; set; } = "";
+	List<BsonDocument> filterResult4 = filter4(manufacturerVar);
 
 	// connecting to database
 	public static List<BsonDocument> filter4(string manufacturer)
@@ -1156,8 +1156,8 @@
 
 @code{
 	// creating instances of vars
-	static public int a_idVar { get; set; } = 103;
-	List<BsonDocument> filterResult6 = filter6(104);
+	static public int a_idVar { get; set; } = 0;
+	List<BsonDocument> filterResult6 = filter6(a_idVar);
 
 	//connecting to database
 	public static List<BsonDocument> filter6(int a_id)
@@ -1289,8 +1289,8 @@
 
 @code{
 	// creating instances of vars
-	static public string city_8_Var { get; set; } = "Mountainview";
-	static public int priceVar { get; set; } = 1000000000;
+	static public string city_8_Var { get; set; } = "";
+	static public int priceVar { get; set; } = 0;
 	List<BsonDocument> filterResult8 = filter8(city_8_Var, priceVar);
 
 	//connecting to databse
@@ -1344,13 +1344,21 @@
 			}
 		}};
 
+		BsonDocument pipelineStage6 = new BsonDocument
+		{{
+			"$group", new BsonDocument{
+				{ "_id", "$soldHomes" } // Grouping by soldHomes
+			}
+		}};
+
 		//building query
 		BsonDocument[] pipeline = new BsonDocument[] {
 			pipelineStage1,
 			pipelineStage2,
 			pipelineStage3,
 			pipelineStage4,
-			pipelineStage5
+			pipelineStage5,
+			pipelineStage6
 		};
 
 		//exec query
@@ -1368,7 +1376,7 @@
 
 @code{
 	// creating instances of vars
-	static public string cityNameVar { get; set; } = "Mountainview";
+	static public string cityNameVar { get; set; } = "";
 	List<BsonDocument> filterResult9 = filter9(cityNameVar);
 
 	//connecting to databse
@@ -1455,11 +1463,11 @@
 
 @code{
 	// creating instances of vars
-	static public string locationVar { get; set; } = "Rivertown";
+	static public string locationVar { get; set; } = "";
 	static public bool isSoldVar { get; set; } = false;
 	static public string isSoldTableVar { get; set; } = "False";
-	static public int bedRoomsVar { get; set; } = 3;
-	static public int bathRoomsVar { get; set; } = 2;
+	static public int bedRoomsVar { get; set; } = 0;
+	static public int bathRoomsVar { get; set; } = 0;
 	List<BsonDocument> filterResult10 = filter10(locationVar, isSoldVar, bedRoomsVar, bathRoomsVar);
 
 	// connecting to database

@@ -16,5 +16,8 @@ namespace BalzorMongoDB.IService
 
 		//deleting an antry
 		string Delete(string homeOwnerID);
+
+		// updating previous owner (called through listings page)
+		void UpdatePrevOwner(int homeIDVar);
 	}
 }
